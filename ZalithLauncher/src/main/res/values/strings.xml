@@ -127,6 +127,8 @@
     <string name="error_timeout">Request timed out</string>
     <string name="error_network_unreachable">Network unavailable</string>
     <string name="error_connection_failed">Failed to connect to server</string>
+    <string name="error_curseforge_not_configured">CurseForge is unavailable until further notice.</string>
+    <string name="error_microsoft_not_configured">Microsoft sign-in is unavailable until further notice.</string>
     <string name="error_parse_failed">Failed to parse data</string>
     <string name="error_bad_request">(%s) The server could not understand the request</string>
     <string name="error_unauthorized">(%s) Please check your credentials and try again</string>
@@ -1519,4 +1521,7 @@
     <string name="guide_tip_blank">Tap any blank area to continue to the next step</string>
     <!-- Next-step hint shown near a screen corner during the final guide step; tapping any blank area finishes the whole guide -->
     <string name="guide_tip_finish">Tap any blank area to finish the guide</string>
+    <string name="vlzy_launcher_tagline">VeryLazy Launcher</string>
+    <string name="vlzy_fork_attribution">VLzyLauncher is an unofficial modified version based on ZalithLauncher2.</string>
+    <string name="vlzy_releases">VLzy releases</string>
 </resources>

@@ -2,15 +2,26 @@ name: Build APK
 
 on:
   workflow_dispatch:
+    inputs:
+      variant:
+        description: APK build variant
+        required: true
+        default: Debug
+        type: choice
+        options: [Debug, Release]
   workflow_call:
     inputs:
       variant:
         required: true
         type: string
     secrets:
-      KEY_PASSWORD:
+      VLZY_RELEASE_KEYSTORE_BASE64:
         required: false
-      STORE_PASSWORD:
+      VLZY_RELEASE_STORE_PASSWORD:
+        required: false
+      VLZY_RELEASE_KEY_ALIAS:
+        required: false
+      VLZY_RELEASE_KEY_PASSWORD:
         required: false
       OAUTH_CLIENT_ID:
         required: false
@@ -27,8 +38,6 @@ jobs:
       fail-fast: false
 
     env:
-      KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-      STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
       OAUTH_CLIENT_ID: ${{ secrets.OAUTH_CLIENT_ID }}
       CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
 
@@ -49,10 +58,51 @@ jobs:
         with:
           add-job-summary: "on-failure"
 
-      - name: Build APK for ${{ matrix.arch }}
+      - name: Validate build variant
+        env:
+          BUILD_VARIANT: ${{ inputs.variant }}
         run: |
-          chmod +x gradlew
-          ./gradlew ZalithLauncher:assemble${{ inputs.variant }} -Darch=${{ matrix.arch }}
+          case "$BUILD_VARIANT" in
+            Debug|Release) ;;
+            *) echo "::error::Build variant must be Debug or Release"; exit 1 ;;
+          esac
+
+      - name: Prepare release signing
+        if: inputs.variant == 'Release'
+        env:
+          VLZY_RELEASE_KEYSTORE_BASE64: ${{ secrets.VLZY_RELEASE_KEYSTORE_BASE64 }}
+          VLZY_RELEASE_STORE_PASSWORD: ${{ secrets.VLZY_RELEASE_STORE_PASSWORD }}
+          VLZY_RELEASE_KEY_ALIAS: ${{ secrets.VLZY_RELEASE_KEY_ALIAS }}
+          VLZY_RELEASE_KEY_PASSWORD: ${{ secrets.VLZY_RELEASE_KEY_PASSWORD }}
+        run: |
+          set -eu
+          for name in VLZY_RELEASE_KEYSTORE_BASE64 VLZY_RELEASE_STORE_PASSWORD VLZY_RELEASE_KEY_ALIAS VLZY_RELEASE_KEY_PASSWORD; do
+            if [[ -z "${!name}" ]]; then
+              echo "::error::Missing release signing secret: $name"
+              exit 1
+            fi
+          done
+          umask 077
+          printf '%s' "$VLZY_RELEASE_KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/vlzy-release.jks"
+          echo "VLZY_RELEASE_STORE_FILE=$RUNNER_TEMP/vlzy-release.jks" >> "$GITHUB_ENV"
+
+      - name: Unit tests
+        if: matrix.arch == 'arm64'
+        run: ./gradlew :ZalithLauncher:testDebugUnitTest -Darch=arm64
+
+      - name: Build APK for ${{ matrix.arch }}
+        env:
+          BUILD_VARIANT: ${{ inputs.variant }}
+          BUILD_ARCH: ${{ matrix.arch }}
+          VLZY_RELEASE_STORE_PASSWORD: ${{ inputs.variant == 'Release' && secrets.VLZY_RELEASE_STORE_PASSWORD || '' }}
+          VLZY_RELEASE_KEY_ALIAS: ${{ inputs.variant == 'Release' && secrets.VLZY_RELEASE_KEY_ALIAS || '' }}
+          VLZY_RELEASE_KEY_PASSWORD: ${{ inputs.variant == 'Release' && secrets.VLZY_RELEASE_KEY_PASSWORD || '' }}
+        run: |
+          ./gradlew ":ZalithLauncher:assemble$BUILD_VARIANT" "-Darch=$BUILD_ARCH"
+
+      - name: Remove temporary release key
+        if: always() && inputs.variant == 'Release'
+        run: rm -f "$RUNNER_TEMP/vlzy-release.jks"
 
       - name: Upload Release APK for ${{ matrix.arch }}
         if: inputs.variant == 'Release'

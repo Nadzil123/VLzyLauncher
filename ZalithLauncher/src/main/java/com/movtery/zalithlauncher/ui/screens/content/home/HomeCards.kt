@@ -70,8 +70,30 @@ object HomeCards {
 
     /** 系统卡片（不可变更） */
     fun systemCards(): List<SystemCard> = buildList {
+        add(forkAttributionCard())
         if (BuildConfig.DEBUG) {
             add(debugWarningCard())
+        }
+    }
+
+    private fun forkAttributionCard() = SystemCard(id = "vlzy_fork_attribution") {
+        BackgroundCard(
+            modifier = Modifier.fillMaxWidth(),
+            shape = MaterialTheme.shapes.extraLarge
+        ) {
+            Column(
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp),
+                verticalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                Text(
+                    text = stringResource(R.string.vlzy_launcher_tagline),
+                    style = MaterialTheme.typography.titleMedium
+                )
+                Text(
+                    text = stringResource(R.string.vlzy_fork_attribution),
+                    style = MaterialTheme.typography.bodySmall
+                )
+            }
         }
     }
 

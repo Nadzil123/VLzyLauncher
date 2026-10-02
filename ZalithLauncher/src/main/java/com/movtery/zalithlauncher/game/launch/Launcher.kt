@@ -250,7 +250,7 @@ abstract class Launcher(
             put("com.sun.jndi.rmi.object.trustURLCodebase", "false")
             put("com.sun.jndi.cosnaming.object.trustURLCodebase", "false")
 
-            put("net.minecraft.clientmodname", BuildKeys.LAUNCHER_NAME)
+            put("net.minecraft.clientmodname", BuildKeys.LAUNCHER_IDENTIFIER)
 
             // fml
             put("fml.earlyprogresswindow", "false")

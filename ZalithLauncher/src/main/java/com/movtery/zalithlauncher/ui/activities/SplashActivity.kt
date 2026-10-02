@@ -25,6 +25,7 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
@@ -39,6 +40,9 @@ import com.movtery.zalithlauncher.components.jre.Jre
 import com.movtery.zalithlauncher.components.jre.UnpackJnaTask
 import com.movtery.zalithlauncher.components.jre.UnpackJreTask
 import com.movtery.zalithlauncher.setting.AllSettings
+import com.movtery.zalithlauncher.setting.enums.AppLanguage
+import com.movtery.zalithlauncher.setting.enums.applyLanguage
+import com.movtery.zalithlauncher.setting.launcherMMKV
 import com.movtery.zalithlauncher.ui.base.BaseAppCompatActivity
 import com.movtery.zalithlauncher.ui.screens.splash.SplashScreen
 import com.movtery.zalithlauncher.ui.theme.ZalithLauncherTheme
@@ -75,6 +79,13 @@ class SplashActivity : BaseAppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
+
+        // Apply the fork's default once; keep explicit app and Android language choices.
+        val language = AllSettings.launcherLanguage
+        if (!launcherMMKV().containsKey(language.key) && AppCompatDelegate.getApplicationLocales().isEmpty) {
+            language.save(AppLanguage.ENGLISH)
+            applyLanguage(AppLanguage.ENGLISH)
+        }
 
         initUnpackItems()
         checkAllTask()

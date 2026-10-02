@@ -76,7 +76,7 @@ class AuthServerApi(private var baseUrl: String) {
                 version = 1
             ),
             requestUser = true,
-            clientToken = BuildKeys.LAUNCHER_NAME.toUuidStr().replace("-", "")
+            clientToken = BuildKeys.LAUNCHER_IDENTIFIER.toUuidStr().replace("-", "")
         )
 
         return requestAuth(Gson().toJson(authRequest), "/authserver/authenticate")

@@ -23,15 +23,13 @@ import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
-import kotlinx.coroutines.ensureActive
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import java.io.IOException
 import java.net.DatagramPacket
 import java.net.DatagramSocket
 import java.net.InetAddress
 import java.net.InetSocketAddress
-import java.net.SocketException
-import java.net.UnknownHostException
 
 private const val TAG = "JVMSocketServer"
 
@@ -43,90 +41,79 @@ object JVMSocketServer {
     private var port: Int = PROCESS_SERVICE_PORT
 
     private var scope: CoroutineScope? = null
-    private var packet: DatagramPacket? = null
     private var socket: DatagramSocket? = null
 
     /**
      * 上一次接收的消息
      */
+    @Volatile
     var receiveMsg: String? = null
         private set
 
+    @Synchronized
+    @Throws(IOException::class)
     fun start(
         ip: String = "127.0.0.1",
         port: Int = PROCESS_SERVICE_PORT,
         onReceive: suspend (receiveMsg: String) -> Unit
     ) {
-        this.ip = ip
-        this.port = port
-        //清空上一轮的接收结果，防止陈旧退出码被当作本轮结果消费
+        stop()
         receiveMsg = null
 
-        scope?.let {
-            it.cancel()
-            scope = null
-        }
-        scope = CoroutineScope(Dispatchers.Default)
+        // Bind before returning so a fast installer exit is queued by the socket.
+        // A bind failure must reach the caller instead of leaving it waiting for an exit.
+        val listener = DatagramSocket(port, InetAddress.getByName(ip))
+        this.ip = ip
+        this.port = listener.localPort
+        socket = listener
+        val serverScope = CoroutineScope(Dispatchers.IO)
+        scope = serverScope
 
-        scope?.launch(Dispatchers.IO) {
+        serverScope.launch {
             val bytes = ByteArray(1024)
-            packet = DatagramPacket(bytes, bytes.size)
-            try {
-                socket = DatagramSocket(port, InetAddress.getByName(ip))
-                Logger.info(TAG, "Socket server init!")
-            } catch (e: SocketException) {
-                Logger.error(TAG, "Failed to init socket server", e)
-            } catch (e: UnknownHostException) {
-                Logger.error(TAG, "Failed to init socket server", e)
-            }
+            val packet = DatagramPacket(bytes, bytes.size)
+            Logger.info(TAG, "Socket server $ip:${listener.localPort} start!")
 
-            startServer(onReceive)
-        }
-    }
-
-    private fun startServer(
-        onReceive: suspend (receiveMsg: String) -> Unit
-    ) {
-        scope?.launch(Dispatchers.IO) {
-            if (packet == null || socket == null) {
-                return@launch
-            }
-            Logger.info(TAG, "Socket server $ip:$port start!")
-
-            while (true) {
+            while (isActive) {
                 try {
-                    ensureActive()
-                    socket!!.receive(packet)
-                    val receiveMsg = String(packet!!.data, packet!!.offset, packet!!.length)
+                    packet.length = bytes.size
+                    listener.receive(packet)
+                    val receiveMsg = String(packet.data, packet.offset, packet.length)
                     Logger.info(TAG, "receive msg: $receiveMsg")
-                    this@JVMSocketServer.receiveMsg = receiveMsg
+                    synchronized(this@JVMSocketServer) {
+                        if (socket !== listener) return@launch
+                        this@JVMSocketServer.receiveMsg = receiveMsg
+                    }
                     onReceive(receiveMsg)
                 } catch (e: Exception) {
-                    if (e is CancellationException) return@launch
-                    else {
-                        Logger.warning(TAG, "Socket server $ip:$port crashed!", e)
-                    }
+                    if (e is CancellationException) throw e
+                    if (!isActive || listener.isClosed) return@launch
+                    Logger.warning(TAG, "Socket server $ip:$port crashed!", e)
+                    return@launch
                 }
             }
         }
     }
 
     @Throws(IOException::class)
+    @Synchronized
     fun send(msg: String) {
-        socket!!.connect(InetSocketAddress(ip, port))
+        val sender = socket ?: throw IOException("Socket server is not running")
+        sender.connect(InetSocketAddress(ip, port))
         val data = msg.toByteArray()
         val packet = DatagramPacket(data, data.size)
-        socket!!.send(packet)
+        sender.send(packet)
     }
 
+    @Synchronized
     fun stop() {
-        socket?.let {
+        val listener = socket
+        socket = null
+        scope?.cancel()
+        scope = null
+        listener?.let {
             it.close()
             Logger.info(TAG, "Socket server $ip:$port stopped!")
         }
-        scope?.cancel()
-        scope = null
-        socket = null
-        packet = null
     }
 }

@@ -1433,4 +1433,7 @@
     <string name="guide_editor_save">Setelah selesai mengedit, jangan lupa menyimpan tata letak kontrol!</string>
     <string name="guide_tip_blank">Ketuk area kosong mana pun untuk lanjut ke langkah berikutnya</string>
     <string name="guide_tip_finish">Ketuk area kosong mana pun untuk mengakhiri panduan</string>
+    <string name="vlzy_launcher_tagline">VeryLazy Launcher</string>
+    <string name="vlzy_fork_attribution">VLzyLauncher adalah versi modifikasi tidak resmi berbasis ZalithLauncher2.</string>
+    <string name="vlzy_releases">Rilis VLzy</string>
 </resources>

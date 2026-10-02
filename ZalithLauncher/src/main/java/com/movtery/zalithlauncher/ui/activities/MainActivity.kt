@@ -54,6 +54,7 @@ import com.movtery.zalithlauncher.game.version.installed.Version
 import com.movtery.zalithlauncher.game.version.installed.VersionsManager
 import com.movtery.zalithlauncher.notification.NotificationManager
 import com.movtery.zalithlauncher.path.PathManager
+import com.movtery.zalithlauncher.path.URL_PROJECT
 import com.movtery.zalithlauncher.path.URL_SUPPORT
 import com.movtery.zalithlauncher.setting.AllSettings
 import com.movtery.zalithlauncher.ui.AndroidStringText
@@ -82,7 +83,6 @@ import com.movtery.zalithlauncher.ui.theme.showThemed
 import com.movtery.zalithlauncher.ui.toAndroidString
 import com.movtery.zalithlauncher.ui.vulkan_checker.VCOperation
 import com.movtery.zalithlauncher.ui.vulkan_checker.VulkanChecker
-import com.movtery.zalithlauncher.upgrade.TooFrequentOperationException
 import com.movtery.zalithlauncher.utils.compareLangTag
 import com.movtery.zalithlauncher.utils.copyText
 import com.movtery.zalithlauncher.utils.festival.getTodayFestivals
@@ -201,12 +201,8 @@ class MainActivity : BaseAppCompatActivity() {
         //初始化通知管理（创建渠道）
         NotificationManager.initManager(this)
 
-        //检查更新
-        if (!isImporting && launcherUpgradeViewModel.operation == LauncherUpgradeOperation.None) {
-            lifecycleScope.launch {
-                launcherUpgradeViewModel.checkOnAppStart()
-            }
-        }
+        // Bootstrap uses the fork's releases page. The inherited automatic updater
+        // serves ZalithLauncher2 APKs and must not offer them as VLzy updates.
 
         //错误信息展示
         lifecycleScope.launch {
@@ -542,31 +538,7 @@ class MainActivity : BaseAppCompatActivity() {
      * 检查启动器更新
      */
     private fun checkUpdate() {
-        lifecycleScope.launch(Dispatchers.IO) {
-            try {
-                val success = launcherUpgradeViewModel.checkManually(
-                    onInProgress = {
-                        withContext(Dispatchers.Main) {
-                            Toast.makeText(this@MainActivity, getString(R.string.generic_in_progress), Toast.LENGTH_SHORT).show()
-                        }
-                    },
-                    onIsLatest = {
-                        withContext(Dispatchers.Main) {
-                            Toast.makeText(this@MainActivity, getString(R.string.upgrade_is_latest), Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                )
-                if (!success) throw RuntimeException()
-            } catch (_: TooFrequentOperationException) {
-                //太频繁了
-                return@launch
-            } catch (_: Exception) {
-                withContext(Dispatchers.Main) {
-                    Toast.makeText(this@MainActivity, getString(R.string.upgrade_get_remote_failed), Toast.LENGTH_SHORT).show()
-                }
-                return@launch
-            }
-        }
+        openLink("$URL_PROJECT/releases")
     }
 
     /**

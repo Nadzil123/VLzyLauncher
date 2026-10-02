@@ -1,4 +1,17 @@
-# Zalith Launcher 2
+# VLzyLauncher — VeryLazy Launcher
+
+<p align="center"><img src="VLzyLauncher_Logo.png" alt="VLzy Launcher logo" width="160" height="160" /></p>
+
+VLzyLauncher is an unofficial modified version based on ZalithLauncher2.
+
+This repository is the VLzy Bootstrap fork. See [Bootstrap scope, build and signing](docs/bootstrap.md),
+[Codex handoff and document order](VLzyLauncher_CODEX_HANDOFF.md),
+[Living specification](VLzyLauncher_Living_Specification.md), and
+[Living implementation plan](VLzyLauncher_Living_Implementation_Plan.md).
+The existing launch core and upstream notices are preserved. VLzy is not affiliated
+with Mojang, Microsoft or the ZalithLauncher project.
+
+## Upstream README and acknowledgements: Zalith Launcher 2
 ![Downloads](https://img.shields.io/github/downloads/ZalithLauncher/ZalithLauncher2/total)
 [![Sponsor](https://img.shields.io/badge/sponsor-30363D?logo=GitHub-Sponsors)](https://afdian.com/a/MovTery)
 

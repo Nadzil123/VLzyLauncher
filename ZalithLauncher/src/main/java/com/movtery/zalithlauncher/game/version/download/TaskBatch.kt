@@ -122,13 +122,18 @@ private suspend fun verifyExistingFilesConcurrently(
  * - 存在未知大小但文件总数确定时，退化为按完成文件数计算；
  * - 连文件总数都无法确定时，显示为不确定进度。
  */
-private fun progressFor(snapshot: BatchProgress, sizesFullyKnown: Boolean, hasFileCount: Boolean): Float = when {
-    sizesFullyKnown && snapshot.totalBytes > 0 ->
-        (snapshot.downloadedBytes.toFloat() / snapshot.totalBytes).coerceIn(0f, 1f)
+private fun progressFor(snapshot: BatchProgress, sizesFullyKnown: Boolean, hasFileCount: Boolean): Float {
+    val progress = when {
+        sizesFullyKnown && snapshot.totalBytes > 0 ->
+            (snapshot.downloadedBytes.toFloat() / snapshot.totalBytes).coerceIn(0f, 1f)
 
-    hasFileCount && snapshot.totalFiles > 0 ->
-        snapshot.downloadedFiles.toFloat() / snapshot.totalFiles
+        hasFileCount && snapshot.totalFiles > 0 ->
+            snapshot.downloadedFiles.toFloat() / snapshot.totalFiles
 
-    else -> -1f
+        else -> -1f
+    }
+    // Transferred bytes include retries and are reported before checksum verification.
+    // Only completed files (including their completion callbacks) can reach 100%.
+    return if (snapshot.downloadedFiles < snapshot.totalFiles) progress.coerceAtMost(0.99f)
+    else progress
 }
-

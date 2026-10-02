@@ -20,7 +20,9 @@ package com.movtery.zalithlauncher.utils.file
 
 import org.apache.commons.codec.digest.MurmurHash2
 import org.junit.Assert.assertEquals
+import org.junit.Rule
 import org.junit.Test
+import org.junit.rules.TemporaryFolder
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.nio.file.Files
@@ -28,14 +30,15 @@ import kotlin.io.path.createTempDirectory
 import kotlin.random.Random
 
 class MurmurHash2IncrementalTest {
+    @get:Rule
+    val temporaryFolder = TemporaryFolder()
 
     @Test
     fun testTwoWay() {
-        val file = File("F:\\Download\\geckolib-forge-1.21.8-5.2.2.jar")
-        val hash1 = way1(file)
-        println("Way 1 hash = $hash1")
-        val hash2 = way2(file)
-        println("Way 2 hash = $hash2")
+        val file = temporaryFolder.newFile("mod.jar").apply {
+            writeBytes(ByteArray(8193) { (it % 256).toByte() })
+        }
+        assertEquals(way1(file), way2(file))
     }
 
     //Old

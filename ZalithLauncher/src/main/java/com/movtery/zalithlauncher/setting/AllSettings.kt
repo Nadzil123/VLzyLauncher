@@ -383,7 +383,7 @@ object AllSettings : SettingsRegistry() {
     /**
      * 启动器语言
      */
-    val launcherLanguage = enumSetting("launcherLanguage", AppLanguage.FOLLOW_SYSTEM)
+    val launcherLanguage = enumSetting("launcherLanguage", AppLanguage.ENGLISH)
 
     /**
      * 启动器部分屏幕全屏
@@ -598,20 +598,20 @@ object AllSettings : SettingsRegistry() {
     /**
      * 搜索模组的初始搜索平台
      */
-    val searchModPlatform = enumSetting("searchModPlatform", Platform.CURSEFORGE)
+    val searchModPlatform = enumSetting("searchModPlatform", Platform.MODRINTH)
 
     /**
      * 搜索整合包的初始搜索平台
      */
-    val searchModpackPlatform = enumSetting("searchModpackPlatform", Platform.CURSEFORGE)
+    val searchModpackPlatform = enumSetting("searchModpackPlatform", Platform.MODRINTH)
 
     /**
      * 搜索资源包的初始搜索平台
      */
-    val searchResourcePackPlatform = enumSetting("searchResourcePackPlatform", Platform.CURSEFORGE)
+    val searchResourcePackPlatform = enumSetting("searchResourcePackPlatform", Platform.MODRINTH)
 
     /**
      * 搜索光影的初始搜索平台
      */
-    val searchShadersPlatform = enumSetting("searchShadersPlatform", Platform.CURSEFORGE)
+    val searchShadersPlatform = enumSetting("searchShadersPlatform", Platform.MODRINTH)
 }

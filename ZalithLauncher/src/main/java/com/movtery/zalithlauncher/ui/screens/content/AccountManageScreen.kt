@@ -61,6 +61,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.movtery.zalithlauncher.BuildKeys
 import com.movtery.zalithlauncher.R
 import com.movtery.zalithlauncher.context.COPY_LABEL_ACCOUNT_UUID
 import com.movtery.zalithlauncher.game.account.Account
@@ -140,7 +141,9 @@ enum class FirstLoginMenu {
     /** 打开微软登录菜单 */
     MICROSOFT,
     /** 打开总登录菜单 */
-    NORMAL
+    NORMAL,
+    /** Open the offline profile editor. */
+    LOCAL
 }
 
 /**
@@ -195,6 +198,9 @@ fun AccountManageScreen(
             FirstLoginMenu.NORMAL -> {
                 actions.onIntent(AccountManageIntent.UpdateLoginMenuOp(LoginMenuOperation.Login))
             }
+            FirstLoginMenu.LOCAL -> {
+                actions.onIntent(AccountManageIntent.UpdateLocalLoginOp(LocalLoginOperation.Edit))
+            }
         }
 
         viewModel.effect.collect { effect ->
@@ -241,7 +247,6 @@ private fun AccountManageContent(
                 .padding(all = 12.dp)
                 .weight(3f),
             currentAccount = profileUiState.currentAccount,
-            isOffline = profileUiState.isOffline,
             actions = actions
         )
 
@@ -253,7 +258,6 @@ private fun AccountManageContent(
                 .weight(7f),
             accounts = profileUiState.accounts,
             currentAccount = profileUiState.currentAccount,
-            isOffline = profileUiState.isOffline,
             accountOperation = operationUiState.accountOp,
             accountSkinOperation = operationUiState.accountSkinOp,
             accountSkinDialogState = operationUiState.accountSkinDialogState,
@@ -278,7 +282,6 @@ private fun ActionsLayout(
     isVisible: Boolean,
     modifier: Modifier = Modifier,
     currentAccount: Account?,
-    isOffline: Boolean,
     actions: AccountActions
 ) {
     val xOffset by swapAnimateDpAsState(
@@ -355,12 +358,7 @@ private fun ActionsLayout(
             modifier = Modifier
                 .fillMaxWidth(),
             onClick = {
-                if (isOffline) {
-                    //非正版状态下，只允许创建微软账号
-                    actions.onIntent(AccountManageIntent.UpdateMicrosoftLoginOp(MicrosoftLoginOperation.Tip))
-                } else {
-                    actions.onIntent(AccountManageIntent.UpdateLoginMenuOp(LoginMenuOperation.Login))
-                }
+                actions.onIntent(AccountManageIntent.UpdateLoginMenuOp(LoginMenuOperation.Login))
             }
         ) {
             MarqueeText(text = stringResource(R.string.account_add_new_account))
@@ -426,6 +424,16 @@ private fun MicrosoftLoginOperation(
     operation: MicrosoftLoginOperation,
     actions: AccountActions
 ) {
+    if (operation is MicrosoftLoginOperation.Tip && BuildKeys.OAUTH_CLIENT_ID.isBlank()) {
+        SimpleAlertDialog(
+            title = stringResource(R.string.account_type_microsoft),
+            text = stringResource(R.string.error_microsoft_not_configured),
+            onDismiss = {
+                actions.onIntent(AccountManageIntent.UpdateMicrosoftLoginOp(MicrosoftLoginOperation.None))
+            }
+        )
+        return
+    }
     when (operation) {
         is MicrosoftLoginOperation.None -> {}
         is MicrosoftLoginOperation.Tip -> {
@@ -680,7 +688,6 @@ private fun AccountsLayout(
     modifier: Modifier = Modifier,
     accounts: List<Account>,
     currentAccount: Account?,
-    isOffline: Boolean,
     accountOperation: AccountOperation,
     accountSkinOperation: AccountSkinOperation,
     accountSkinDialogState: AccountManageViewModel.AccountSkinDialogState,
@@ -723,7 +730,7 @@ private fun AccountsLayout(
                             .padding(vertical = 6.dp),
                         currentAccount = currentAccount,
                         account = account,
-                        enabled = !isOffline, //非正版状态下不允许选择任何状态
+                        enabled = true,
                         onSelected = { AccountsManager.setCurrentAccount(it) },
                         openChangeSkinDialog = {
                             if (!account.isAuthServerAccount()) {

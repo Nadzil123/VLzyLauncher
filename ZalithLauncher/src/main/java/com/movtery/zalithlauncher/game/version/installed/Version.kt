@@ -26,7 +26,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.google.gson.JsonObject
 import com.movtery.zalithlauncher.BuildConfig
-import com.movtery.zalithlauncher.BuildKeys
 import com.movtery.zalithlauncher.context.GlobalContext
 import com.movtery.zalithlauncher.game.launch.LogName
 import com.movtery.zalithlauncher.game.path.getVersionsHome
@@ -40,6 +39,7 @@ import com.movtery.zalithlauncher.utils.file.readText
 import com.movtery.zalithlauncher.utils.logging.Logger
 import com.movtery.zalithlauncher.utils.platform.getMaxMemoryForSettings
 import com.movtery.zalithlauncher.utils.string.isNotEmptyOrBlank
+import com.movtery.zalithlauncher.vlzy.storage.LegacyVersionStorage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.parcelize.IgnoredOnParcel
@@ -120,7 +120,7 @@ class Version(
     /**
      * @return 启动器版本标识文件夹
      */
-    fun getZalithVersionPath(): File = File(getVersionPath(), BuildKeys.LAUNCHER_IDENTIFIER)
+    fun getZalithVersionPath(): File = getZalithVersionPath(getVersionPath())
 
     /**
      * @return 游戏的上一次运行日志
@@ -231,7 +231,7 @@ class Version(
 }
 
 /** 通过版本文件夹获取启动器版本标识文件夹 */
-fun getZalithVersionPath(versionFolder: File): File = File(versionFolder, BuildKeys.LAUNCHER_IDENTIFIER)
+fun getZalithVersionPath(versionFolder: File): File = LegacyVersionStorage.directoryIn(versionFolder)
 
 /** 通过版本文件夹获取版本图标文件 */
 fun getVersionIconFile(versionFolder: File): File = File(getZalithVersionPath(versionFolder), "VersionIcon.png")

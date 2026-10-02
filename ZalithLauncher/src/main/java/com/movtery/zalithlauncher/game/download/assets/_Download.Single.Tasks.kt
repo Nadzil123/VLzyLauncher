@@ -30,6 +30,7 @@ import com.movtery.zalithlauncher.ui.androidText
 import com.movtery.zalithlauncher.utils.file.ensureParentDirectory
 import com.movtery.zalithlauncher.utils.file.formatFileSize
 import com.movtery.zalithlauncher.utils.logging.Logger
+import com.movtery.zalithlauncher.utils.network.ServiceNotConfiguredException
 import com.movtery.zalithlauncher.utils.network.downloadFileFromSources
 import com.movtery.zalithlauncher.utils.network.toLocal
 import com.movtery.zalithlauncher.utils.network.withSpeedReport
@@ -179,6 +180,7 @@ private fun downloadSingleFile(
 
 fun mapExceptionToMessage(e: Throwable): AndroidStringText {
     return when (e) {
+        is ServiceNotConfiguredException -> e.toLocal()
         is HttpRequestTimeoutException -> androidText(R.string.error_timeout)
         is UnknownHostException, is UnresolvedAddressException -> androidText(R.string.error_network_unreachable)
         is ConnectException -> androidText(R.string.error_connection_failed)

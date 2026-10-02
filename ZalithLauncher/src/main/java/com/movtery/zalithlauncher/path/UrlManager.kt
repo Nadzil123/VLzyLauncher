@@ -21,6 +21,7 @@ package com.movtery.zalithlauncher.path
 import com.movtery.zalithlauncher.BuildConfig
 import com.movtery.zalithlauncher.BuildKeys
 import com.movtery.zalithlauncher.utils.network.ResilientDns
+import com.movtery.zalithlauncher.utils.network.ServiceNotConfiguredException
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.plugins.HttpTimeout
@@ -49,7 +50,7 @@ const val URL_MCMOD: String = "https://www.mcmod.cn/"
 const val URL_MINECRAFT_VERSION_REPOS: String = "https://piston-meta.mojang.com/mc/game/version_manifest_v2.json"
 const val URL_MINECRAFT_ASSETS_INDEX: String = "https://launchermeta.mojang.com/v1/packages"
 const val URL_MINECRAFT_PURCHASE = "https://www.xbox.com/games/store/minecraft-java-bedrock-edition-for-pc/9nxp44l49shj"
-const val URL_PROJECT: String = "https://github.com/ZalithLauncher/ZalithLauncher2"
+const val URL_PROJECT: String = "https://github.com/Nadzil123/VLzyLauncher"
 const val URL_PROJECT_INFO: String = "https://api.github.com/repos/ZalithLauncher/Zalith-Info/contents/v2"
 const val URL_COMMUNITY: String = "https://github.com/ZalithLauncher/ZalithLauncher2/graphs/contributors"
 const val URL_WEBLATE: String = "https://hosted.weblate.org/projects/zalithlauncher2"
@@ -69,22 +70,25 @@ private fun isCurseForgeHost(host: String): Boolean =
             host == CURSEFORGE_CDN_SUFFIX ||
             host.endsWith(".$CURSEFORGE_CDN_SUFFIX")
 
-/**
- * An [Interceptor] for CurseForge API requests.
- *
- * It automatically injects the `x-api-key` header when the request targets a
- * CurseForge host, provided the API key is not blank.
- */
+private fun curseForgeApiKeyForHost(host: String): String? {
+    if (!isCurseForgeHost(host)) return null
+    val apiKey = BuildKeys.CURSEFORGE_API.trim()
+    if (host == HOST_CURSEFORGE_API && apiKey.isEmpty()) {
+        throw ServiceNotConfiguredException(ServiceNotConfiguredException.Service.CURSEFORGE)
+    }
+    // Public CDN URLs remain usable when this build has no API key.
+    return apiKey.takeIf { it.isNotEmpty() }
+}
+
+/** Adds the configured key and rejects unavailable API requests before network I/O. */
 private val CURSEFORGE_INTERCEPTOR = Interceptor { chain ->
     val request = chain.request()
-    if (isCurseForgeHost(request.url.host)) {
-        val apiKey = BuildKeys.CURSEFORGE_API
-        if (apiKey.isNotBlank()) {
-            val newRequest = request.newBuilder()
-                .header("x-api-key", apiKey)
-                .build()
-            return@Interceptor chain.proceed(newRequest)
-        }
+    val apiKey = curseForgeApiKeyForHost(request.url.host)
+    if (apiKey != null) {
+        val newRequest = request.newBuilder()
+            .header("x-api-key", apiKey)
+            .build()
+        return@Interceptor chain.proceed(newRequest)
     }
     chain.proceed(request)
 }
@@ -131,11 +135,8 @@ val GLOBAL_CLIENT = HttpClient(OkHttp) {
     }
 }.apply {
     requestPipeline.intercept(HttpRequestPipeline.State) {
-        if (isCurseForgeHost(context.url.host)) {
-            val apiKey = BuildKeys.CURSEFORGE_API
-            if (apiKey.isNotBlank()) {
-                context.header("x-api-key", apiKey)
-            }
+        curseForgeApiKeyForHost(context.url.host)?.let { apiKey ->
+            context.header("x-api-key", apiKey)
         }
     }
 }

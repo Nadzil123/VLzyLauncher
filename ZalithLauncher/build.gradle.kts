@@ -23,19 +23,64 @@ val launcherVersionCode = (project.findProperty("launcher_version_code") as? Str
 val launcherVersionName = project.findProperty("launcher_version_name") as? String ?: error("The \"launcher_version_name\" property is not set in gradle.properties.")
 
 val defaultOAuthClientID = project.findProperty("oauth_client_id") as? String
-val defaultStorePassword = project.findProperty("default_store_password") as? String ?: error("The \"default_store_password\" property is not set in gradle.properties.")
-val defaultKeyPassword = project.findProperty("default_key_password") as? String ?: error("The \"default_key_password\" property is not set in gradle.properties.")
 val defaultCurseForgeApiKey = project.findProperty("curseforge_api_key") as? String
+
+// Keep release credentials outside the repository. Debug uses Android's local key.
+fun releaseSigningValue(environment: String, property: String): String? =
+    providers.environmentVariable(environment)
+        .orElse(providers.gradleProperty(property))
+        .orNull?.takeIf { it.isNotBlank() }
+
+val releaseStoreFile = releaseSigningValue("VLZY_RELEASE_STORE_FILE", "vlzyReleaseStoreFile")
+val releaseStorePassword = releaseSigningValue("VLZY_RELEASE_STORE_PASSWORD", "vlzyReleaseStorePassword")
+val releaseKeyAlias = releaseSigningValue("VLZY_RELEASE_KEY_ALIAS", "vlzyReleaseKeyAlias")
+val releaseKeyPassword = releaseSigningValue("VLZY_RELEASE_KEY_PASSWORD", "vlzyReleaseKeyPassword")
+val hasReleaseSigning = listOf(releaseStoreFile, releaseStorePassword, releaseKeyAlias, releaseKeyPassword)
+    .all { !it.isNullOrBlank() }
+
+val validateVlzyReleaseSigning by tasks.registering {
+    group = "verification"
+    description = "Checks that external VLzy release signing is fully configured."
+    val configuredInputs = mapOf(
+        "VLZY_RELEASE_STORE_FILE" to !releaseStoreFile.isNullOrBlank(),
+        "VLZY_RELEASE_STORE_PASSWORD" to !releaseStorePassword.isNullOrBlank(),
+        "VLZY_RELEASE_KEY_ALIAS" to !releaseKeyAlias.isNullOrBlank(),
+        "VLZY_RELEASE_KEY_PASSWORD" to !releaseKeyPassword.isNullOrBlank()
+    )
+    val keyFile = releaseStoreFile?.let(rootProject::file)
+    doLast {
+        val missing = configuredInputs.filterValues { !it }.keys
+        check(missing.isEmpty()) {
+            "Missing release signing configuration: ${missing.joinToString()}. See docs/bootstrap.md."
+        }
+        check(keyFile?.isFile == true && keyFile.canRead()) {
+            "VLZY_RELEASE_STORE_FILE must point to a readable external keystore."
+        }
+    }
+}
+tasks.matching { it.name == "preReleaseBuild" || it.name == "validateSigningRelease" }.configureEach {
+    dependsOn(validateVlzyReleaseSigning)
+}
 
 val projectArch: String = System.getProperty("arch", "all")
 
+// GameVersionNumber reads these APK assets through Class.getResourceAsStream.
+// Local JVM tests need the same paths on their classpath, without copying JRE assets.
+val versionCatalogTestResources by tasks.registering(Sync::class) {
+    from("src/main/assets/game") {
+        include("versions.txt", "version-alias.csv")
+        into("assets/game")
+    }
+    into(layout.buildDirectory.dir("generated/versionCatalogTestResources"))
+}
+
 fun getKeyFromLocal(envKey: String, fileName: String? = null, default: String? = null): String {
-    val key = System.getenv(envKey)
+    val key = System.getenv(envKey)?.trim()?.takeIf { it.isNotEmpty() }
     return key ?: fileName?.let {
         val file = File(rootDir, fileName)
-        if (file.canRead() && file.isFile) file.readText() else null
-    } ?: default ?: run {
-        logger.warn("BUILD: $envKey not set; related features may throw exceptions.")
+        if (file.canRead() && file.isFile) file.readText().trim().takeIf { it.isNotEmpty() } else null
+    } ?: default?.trim()?.takeIf { it.isNotEmpty() } ?: run {
+        logger.warn("BUILD: $envKey not set; its integration is unavailable. See docs/service-configuration.md.")
         ""
     }
 }
@@ -49,23 +94,18 @@ android {
     }
 
     signingConfigs {
-        create("releaseBuild") {
-            storeFile = file("zalith_launcher.jks")
-            storePassword = getKeyFromLocal("STORE_PASSWORD", ".store_password.txt")
-            keyAlias = "movtery_zalith"
-            keyPassword = getKeyFromLocal("KEY_PASSWORD", ".key_password.txt")
-        }
-        create("debugBuild") {
-            storeFile = file("zalith_launcher_debug.jks")
-            storePassword = defaultStorePassword
-            keyAlias = "movtery_zalith_debug"
-            keyPassword = defaultKeyPassword
+        if (hasReleaseSigning) {
+            create("releaseBuild") {
+                storeFile = releaseStoreFile?.let(rootProject::file)
+                storePassword = releaseStorePassword
+                keyAlias = releaseKeyAlias
+                keyPassword = releaseKeyPassword
+            }
         }
     }
 
     defaultConfig {
-        applicationId = zalithPackageName
-        applicationIdSuffix = ".v2"
+        applicationId = "com.nadzil123.vlzylauncher"
         minSdk = 26
         targetSdk = 34
         versionCode = launcherVersionCode
@@ -77,7 +117,7 @@ android {
         release {
             isMinifyEnabled = true
             isShrinkResources = true
-            signingConfig = signingConfigs.getByName("releaseBuild")
+            signingConfig = signingConfigs.findByName("releaseBuild")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -87,7 +127,7 @@ android {
             isMinifyEnabled = false
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-debug"
-            signingConfig = signingConfigs.getByName("debugBuild")
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
 
@@ -133,6 +173,7 @@ android {
     }
     testOptions {
         unitTests {
+            all { test -> test.classpath += files(versionCatalogTestResources) }
             isIncludeAndroidResources = true
             //让 android.util.Log 等框架方法在本地单测中返回默认值而非抛出异常
             isReturnDefaultValues = true

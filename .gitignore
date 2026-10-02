@@ -13,6 +13,10 @@ local.properties
 .store_password.txt
 .key_password.txt
 .curseforge_api.txt
+*.jks
+*.keystore
+*.p12
+*.pfx
 LWJGL/build/
 LWJGL/*/build/
 

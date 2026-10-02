@@ -102,15 +102,23 @@ fun AboutInfoScreen(
                     title = stringResource(R.string.about_launcher_title)
                 ) {
                     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                        Text(
+                            text = stringResource(R.string.vlzy_launcher_tagline),
+                            style = MaterialTheme.typography.titleMedium
+                        )
+                        Text(
+                            text = stringResource(R.string.vlzy_fork_attribution),
+                            style = MaterialTheme.typography.bodyMedium
+                        )
                         ButtonIconItem(
-                            icon = painterResource(R.drawable.img_launcher),
+                            icon = painterResource(R.drawable.vlzy_launcher_logo),
                             title = BuildKeys.LAUNCHER_NAME,
                             text = stringResource(R.string.about_launcher_version, BuildConfig.VERSION_NAME),
                             button = {
                                 Button(
                                     onClick = checkUpdate
                                 ) {
-                                    Text(text = stringResource(R.string.upgrade_title))
+                                    Text(text = stringResource(R.string.vlzy_releases))
                                 }
                                 Button(
                                     onClick = { openLink(URL_PROJECT) }
@@ -123,7 +131,7 @@ fun AboutInfoScreen(
                         ButtonIconItem(
                             icon = painterResource(R.drawable.img_avatar_movtery),
                             title = stringResource(R.string.about_launcher_author_movtery_title),
-                            text = stringResource(R.string.about_launcher_author_movtery_text, BuildKeys.LAUNCHER_NAME),
+                            text = stringResource(R.string.about_launcher_author_movtery_text, "Zalith Launcher 2"),
                             button = {
                                 Button(
                                     onClick = { openLink(URL_SUPPORT) }

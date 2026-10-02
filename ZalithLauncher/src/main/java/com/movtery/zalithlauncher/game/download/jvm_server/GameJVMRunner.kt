@@ -181,7 +181,8 @@ suspend fun startJvmServiceAndWaitExit(
             if (!doneSignal.isCompleted) {
                 doneSignal.complete(Unit)
             }
-            JVMSocketServer.stop()
+            // The waiting coroutine owns cleanup in finally. Closing here after
+            // completing the signal could close a subsequent installer's listener.
         }
 
         var attempt = 0

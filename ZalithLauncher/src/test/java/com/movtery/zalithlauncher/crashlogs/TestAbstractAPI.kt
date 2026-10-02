@@ -21,9 +21,19 @@ package com.movtery.zalithlauncher.crashlogs
 import com.movtery.zalithlauncher.crashlogs.platform.MCLogsAPI
 import com.movtery.zalithlauncher.crashlogs.platform.MirroredAPI
 import kotlinx.coroutines.runBlocking
+import org.junit.Assume.assumeTrue
+import org.junit.Before
 import org.junit.Test
 
 class TestAbstractAPI {
+    @Before
+    fun requireManualRemoteIntegrationRun() {
+        assumeTrue(
+            "Manual test uploads content to public services; set VLZY_RUN_REMOTE_INTEGRATION_TESTS=true to opt in.",
+            System.getenv("VLZY_RUN_REMOTE_INTEGRATION_TESTS") == "true"
+        )
+    }
+
     @Test
     fun testMirroredAPI() {
         runBlocking {

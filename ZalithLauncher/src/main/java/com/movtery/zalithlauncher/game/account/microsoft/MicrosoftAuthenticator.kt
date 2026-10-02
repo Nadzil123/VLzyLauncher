@@ -47,6 +47,7 @@ import com.movtery.zalithlauncher.game.account.yggdrasil.getPlayerProfile
 import com.movtery.zalithlauncher.game.account.yggdrasil.getSkinModel
 import com.movtery.zalithlauncher.path.GLOBAL_CLIENT
 import com.movtery.zalithlauncher.utils.logging.Logger
+import com.movtery.zalithlauncher.utils.network.ServiceNotConfiguredException
 import com.movtery.zalithlauncher.utils.network.httpPostJson
 import com.movtery.zalithlauncher.utils.network.safeBodyAsJson
 import com.movtery.zalithlauncher.utils.network.submitForm
@@ -92,16 +93,21 @@ const val XBL_AUTH_URL = "https://user.auth.xboxlive.com"
 const val XSTS_AUTH_URL = "https://xsts.auth.xboxlive.com"
 const val MINECRAFT_SERVICES_URL = "https://api.minecraftservices.com"
 
+private fun requireMicrosoftClientId(): String = BuildKeys.OAUTH_CLIENT_ID.trim().ifEmpty {
+    throw ServiceNotConfiguredException(ServiceNotConfiguredException.Service.MICROSOFT)
+}
+
 /**
  * 从 Microsoft 身份验证终端节点获取设备代码响应
  * 设备代码用于在单独的设备或浏览器上授权用户
  */
 suspend fun fetchDeviceCodeResponse(context: CoroutineContext): DeviceCodeResponse = coroutineScope {
+    val clientId = requireMicrosoftClientId()
     withRetry {
         submitForm(
             url = "$MICROSOFT_AUTH_URL$TENANT/oauth2/v2.0/devicecode",
             parameters = Parameters.build {
-                append("client_id", BuildKeys.OAUTH_CLIENT_ID)
+                append("client_id", clientId)
                 append("scope", SCOPES.joinToString(" "))
             },
             context = context
@@ -118,6 +124,7 @@ suspend fun getTokenResponse(
     context: CoroutineContext,
     checkCancelled: suspend (time: Int) -> Boolean
 ): TokenResponse = coroutineScope {
+    val clientId = requireMicrosoftClientId()
     var pollingInterval = codeResponse.interval * 1000L
     val expireTime = System.currentTimeMillis() + codeResponse.expiresIn * 1000L
 
@@ -141,7 +148,7 @@ suspend fun getTokenResponse(
                 parameters = Parameters.build {
                     append("grant_type", "urn:ietf:params:oauth:grant-type:device_code")
                     append("device_code", codeResponse.deviceCode)
-                    append("client_id", BuildKeys.OAUTH_CLIENT_ID)
+                    append("client_id", clientId)
                     append("tenant", TENANT)
                 },
                 context = context
@@ -264,6 +271,7 @@ private suspend fun refreshAccessToken(
     update: (AsyncStatus) -> Unit,
     context: CoroutineContext
 ): Pair<String, String> {
+    val clientId = requireMicrosoftClientId()
     update(AsyncStatus.GETTING_ACCESS_TOKEN)
 
     return withRetry {
@@ -271,7 +279,7 @@ private suspend fun refreshAccessToken(
             val response = submitForm<JsonObject>(
                 url = "$LIVE_AUTH_URL/oauth20_token.srf",
                 parameters = Parameters.build {
-                    append("client_id", BuildKeys.OAUTH_CLIENT_ID)
+                    append("client_id", clientId)
                     append("refresh_token", refreshToken)
                     append("grant_type", "refresh_token")
                 },
@@ -441,7 +449,7 @@ private suspend fun createAccount(
         this.accessToken = authResponse.accessToken
         this.expiresAt = System.currentTimeMillis() + authResponse.expiresIn * 1000
         this.accountType = AccountType.MICROSOFT.tag
-        this.clientToken = BuildKeys.LAUNCHER_NAME.toUuidStr().replace("-", "")
+        this.clientToken = BuildKeys.LAUNCHER_IDENTIFIER.toUuidStr().replace("-", "")
         this.profileId = profileId
         this.refreshToken = refreshToken.ifEmpty { "None" }
         this.xUid = uhs

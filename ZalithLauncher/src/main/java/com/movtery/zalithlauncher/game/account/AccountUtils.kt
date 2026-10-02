@@ -46,6 +46,7 @@ import com.movtery.zalithlauncher.ui.androidText
 import com.movtery.zalithlauncher.ui.screens.content.elements.MicrosoftLoginOperation
 import com.movtery.zalithlauncher.utils.copyText
 import com.movtery.zalithlauncher.utils.logging.Logger
+import com.movtery.zalithlauncher.utils.network.ServiceNotConfiguredException
 import com.movtery.zalithlauncher.utils.network.toLocal
 import com.movtery.zalithlauncher.viewmodel.ErrorViewModel
 import io.ktor.client.plugins.HttpRequestTimeoutException
@@ -162,6 +163,7 @@ fun microsoftLogin(
                 Logger.error(TAG, "Microsoft account login failed", th)
             }
             when (th) {
+                is ServiceNotConfiguredException -> th.toLocal()
                 is HttpRequestTimeoutException -> androidText(R.string.account_logging_time_out)
                 is NotPurchasedMinecraftException -> toLocal()
                 is MinecraftProfileException -> th.toLocal()
@@ -304,6 +306,7 @@ fun Throwable.isReloginRequired(): Boolean {
 }
 
 fun accountErrorText(th: Throwable): AndroidStringText = when (th) {
+    is ServiceNotConfiguredException -> th.toLocal()
     is NotPurchasedMinecraftException -> toLocal()
     is MinecraftProfileException -> th.toLocal()
     is XboxLoginException -> th.toLocal()

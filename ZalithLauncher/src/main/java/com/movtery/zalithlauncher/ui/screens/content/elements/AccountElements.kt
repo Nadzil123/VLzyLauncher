@@ -442,16 +442,7 @@ fun LoginMenuDialog(
                                 .padding(start = 12.dp, end = 6.dp),
                             verticalArrangement = Arrangement.spacedBy(12.dp)
                         ) {
-                            //微软登录
-                            LoginItem(
-                                modifier = Modifier.fillMaxWidth(),
-                                title = stringResource(R.string.account_type_microsoft),
-                                onClick = {
-                                    onMicrosoftLogin()
-                                    onDismissRequest()
-                                }
-                            )
-                            //离线登录
+                            //Offline profiles are available without an online account.
                             LoginItem(
                                 modifier = Modifier.fillMaxWidth(),
                                 title = stringResource(R.string.account_type_local),
@@ -460,6 +451,23 @@ fun LoginMenuDialog(
                                     onDismissRequest()
                                 }
                             )
+                            val microsoftLoginAvailable = remember { BuildKeys.OAUTH_CLIENT_ID.isNotBlank() }
+                            LoginItem(
+                                modifier = Modifier.fillMaxWidth(),
+                                title = stringResource(R.string.account_type_microsoft),
+                                enabled = microsoftLoginAvailable,
+                                onClick = {
+                                    onMicrosoftLogin()
+                                    onDismissRequest()
+                                }
+                            )
+                            if (!microsoftLoginAvailable) {
+                                Text(
+                                    modifier = Modifier.padding(horizontal = 8.dp),
+                                    text = stringResource(R.string.error_microsoft_not_configured),
+                                    style = MaterialTheme.typography.bodySmall
+                                )
+                            }
                         }
 
                         LazyColumn(
@@ -545,6 +553,7 @@ private fun PreviewLoginMenuDialog() {
 fun LoginItem(
     modifier: Modifier = Modifier,
     title: String,
+    enabled: Boolean = true,
     icon: @Composable () -> Unit = @Composable {
         Icon(
             modifier = Modifier.size(22.dp),
@@ -558,6 +567,7 @@ fun LoginItem(
         modifier = modifier,
         title = title,
         icon = icon,
+        enabled = enabled,
         onClick = onClick
     )
 }

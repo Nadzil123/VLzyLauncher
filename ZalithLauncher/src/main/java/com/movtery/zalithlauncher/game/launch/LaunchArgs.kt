@@ -231,7 +231,7 @@ class LaunchArgs(
         }
         argsList.add("-Dlog4j.configurationFile=${configFilePath.absolutePath}")
         argsList.add("-Dminecraft.client.jar=${clientJar.absolutePath}")
-        argsList.add("-Dminecraft.launcher.brand=${BuildKeys.LAUNCHER_NAME}")
+        argsList.add("-Dminecraft.launcher.brand=${BuildKeys.LAUNCHER_IDENTIFIER}")
         argsList.add("-Dminecraft.launcher.version=${BuildConfig.VERSION_NAME}")
 
         return argsList
@@ -384,7 +384,7 @@ class LaunchArgs(
     }
 
     private fun setLauncherInfo(verArgMap: MutableMap<String, String>) {
-        verArgMap["launcher_name"] = BuildKeys.LAUNCHER_NAME
+        verArgMap["launcher_name"] = BuildKeys.LAUNCHER_IDENTIFIER
         verArgMap["launcher_version"] = BuildConfig.VERSION_NAME
         verArgMap["version_type"] = version.getCustomInfo()
             .takeIf { it.isNotEmptyOrBlank() }

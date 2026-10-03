@@ -555,8 +555,9 @@ The owner rejected limiting branding to visible UI. Execute on `main`:
 5. Build `:VLzyLauncher:testDebugUnitTest :VLzyLauncher:assembleDebug -Darch=arm64`;
    inspect APK identity, native symbols, embedded class paths, signature and logo.
 6. Audit tracked paths/content for unexplained old names, review the full change,
-   and record evidence in `docs/project-naming.md`. GitHub publication remains
-   pending restored write authentication; do not repeat the rejected upload.
+   and record evidence in `docs/project-naming.md`. GitHub authentication was
+   restored on 2026-10-03; use authenticated Git to push `main` and verify the
+   remote commit instead of repeating the earlier rejected integration upload.
 
 Locally verified on 2026-10-03 in the first-alpha build: 114 tests passed, 3 optional
 remote tests skipped, both LWJGL variants rebuilt, and the ARM64 APK passed

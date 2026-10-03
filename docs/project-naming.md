@@ -118,5 +118,7 @@ The Foojay resolver is updated to 1.0.0 because 0.8.0 references the removed
 The [official plugin release notes](https://plugins.gradle.org/plugin/org.gradle.toolchains.foojay-resolver-convention/1.0.0)
 confirm that this version removes the obsolete reference.
 
-GitHub publication remains pending write authentication; the earlier integration
-upload returned `403: Resource not accessible by integration`.
+GitHub CLI authentication was restored on 2026-10-03, and the owner authorized
+pushing `main`. The earlier integration upload's `403` is retained as historical
+context, not a reason to skip the newly authenticated Git path. Verify the remote
+commit after pushing; release/tag publication is separate from a branch push.

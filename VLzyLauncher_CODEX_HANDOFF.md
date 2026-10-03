@@ -34,13 +34,13 @@ matches the earlier VLzy debug build. Independent source review found no confirm
 correctness blockers. Artifact filename and SHA-256 are in the verification link
 above; the alpha has not yet been tested on a physical device.
 
-Publication is pending: the previous GitHub integration write returned
-`403: Resource not accessible by integration`, and command-line Git lacked usable
-credentials. Do not describe local commits or APKs as pushed or released. Retry
-publication only after authentication or integration permissions change.
-The latest `gh auth status` check also reports that no GitHub host is logged in.
+GitHub CLI authentication was restored on 2026-10-03: `gh auth status` confirms
+the active `Nadzil123` account with repository and workflow access. The owner
+authorized pushing `main`. The earlier missing-credentials/403 publication blocker
+is historical; use the authenticated Git path and verify the remote commit after
+pushing. A branch push does not itself publish a GitHub release or upload an APK.
 Use the prepared [alpha release notes](docs/releases/v1.0.0-alpha.1-20261003.md)
-when the tag and release can be published.
+for the separately published alpha tag and release; check GitHub for their status.
 
 After this slice, prioritize alpha device validation and reliability toward 1.0.0.
 Microsoft sign-in and CurseForge remain unavailable until further notice; offline

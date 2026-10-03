@@ -52,6 +52,34 @@ Accepted branding requirements — 2026-10-01:
   for launcher icons, splash, and About. Replace the old themed-icon reference so
   supported launcher configurations cannot select the upstream artwork.
 
+Full naming scope — owner correction accepted 2026-10-03:
+
+- The Android module and directory shall be `VLzyLauncher`; source packages and
+  JNI class/symbol references shall use `com.nadzil123.vlzylauncher`.
+- Rename launcher application/bridge/theme classes, native guards, Gradle tasks,
+  workflow paths and current documentation together. Original copyright holders
+  and license text remain accurate.
+- Keep application IDs and signing unchanged so this remains an update to the
+  existing VLzy app. Preserve stored account UUIDs and renderer/control choices.
+- New version metadata uses `VLzyLauncher/`, selected-version state uses
+  `vlzy-game.cfg`, and file-manager preferences use `vlzy_file_manager`.
+- Migrate existing metadata without overwriting newer destination data; repeated
+  access is idempotent. A failed move must preserve and use the existing data.
+- Isolate old storage/plugin identifiers and real upstream service URLs in
+  explicitly documented compatibility/provenance files. Do not fabricate renamed
+  external URLs or silently break installed renderer plugins.
+- Fresh native compilation, manifest/JNI checks, migration regressions, application
+  tests and an ARM64 APK are required after this namespace change.
+
+Release identity — owner instruction accepted 2026-10-03:
+
+- GitHub release title: `VLzyLauncher v1.0.0-alpha.1-20261003`.
+- Git tag: `v1.0.0-alpha.1-20261003`; base Android version name:
+  `1.0.0-alpha.1-20261003`. Debug builds retain their `-debug` suffix.
+- Keep the Android label `VLzy Launcher` and monotonic version code `200048`.
+- Record verified work, remaining release checks and the 1.0.0 focus in
+  `VLzyLauncher_CODEX_HANDOFF.md`. Work and publication use `main`.
+
 ---
 
 # 3. Instance Requirements
@@ -73,7 +101,7 @@ Instance capabilities should include:
 - per-instance graphics,
 - per-instance controls,
 - content isolation,
-- safe migration from Zalith-based configuration,
+- safe migration from inherited launcher configuration,
 - recovery metadata,
 - snapshot/rollback capability where practical.
 

@@ -99,14 +99,14 @@ CDN and unrelated hosts still reach the transport when the key is absent. Tests
 of missing configuration are conditional when a build actually has credentials;
 all five ran without skips in this local build.
 
-The full command was `:ZalithLauncher:testDebugUnitTest :ZalithLauncher:assembleDebug
+The full command was `:VLzyLauncher:testDebugUnitTest :VLzyLauncher:assembleDebug
 --continue -Darch=arm64`, using the external ARM64 host-tool setup described in
 [Bootstrap verification](bootstrap-verification.md). After a session interruption,
 the completed build was recovered from `daemon-25792.out.log` (lines 915–916), the
 fresh XML test reports, and the resulting APK. Signature, metadata, and hash were
 then verified directly.
 
-APK: `ZalithLauncher/build/outputs/apk/debug/VLzyLauncher-Debug-1.0.0-bootstrap.2-arm64-v8a.apk`
+APK: `VLzyLauncher/build/outputs/apk/debug/VLzyLauncher-Debug-1.0.0-bootstrap.2-arm64-v8a.apk`
 (216,333,437 bytes). SHA-256:
 
 ```text

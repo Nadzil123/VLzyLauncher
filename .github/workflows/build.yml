@@ -88,7 +88,7 @@ jobs:
 
       - name: Unit tests
         if: matrix.arch == 'arm64'
-        run: ./gradlew :ZalithLauncher:testDebugUnitTest -Darch=arm64
+        run: ./gradlew :VLzyLauncher:testDebugUnitTest -Darch=arm64
 
       - name: Build APK for ${{ matrix.arch }}
         env:
@@ -98,7 +98,7 @@ jobs:
           VLZY_RELEASE_KEY_ALIAS: ${{ inputs.variant == 'Release' && secrets.VLZY_RELEASE_KEY_ALIAS || '' }}
           VLZY_RELEASE_KEY_PASSWORD: ${{ inputs.variant == 'Release' && secrets.VLZY_RELEASE_KEY_PASSWORD || '' }}
         run: |
-          ./gradlew ":ZalithLauncher:assemble$BUILD_VARIANT" "-Darch=$BUILD_ARCH"
+          ./gradlew ":VLzyLauncher:assemble$BUILD_VARIANT" "-Darch=$BUILD_ARCH"
 
       - name: Remove temporary release key
         if: always() && inputs.variant == 'Release'
@@ -110,7 +110,7 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: release apk (${{ matrix.arch }})
-          path: ZalithLauncher/build/outputs/apk/release/*.apk
+          path: VLzyLauncher/build/outputs/apk/release/*.apk
 
       - name: Upload Release Mapping for ${{ matrix.arch }}
         if: inputs.variant == 'Release'
@@ -118,7 +118,7 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: mapping (${{ matrix.arch }})
-          path: ZalithLauncher/build/outputs/mapping/release/mapping.txt
+          path: VLzyLauncher/build/outputs/mapping/release/mapping.txt
 
       - name: Upload Debug APK for ${{ matrix.arch }}
         if: inputs.variant == 'Debug'
@@ -126,4 +126,4 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: debug apk (${{ matrix.arch }})
-          path: ZalithLauncher/build/outputs/apk/debug/*.apk
+          path: VLzyLauncher/build/outputs/apk/debug/*.apk

@@ -1,5 +1,9 @@
 # Bootstrap verification
 
+This is a historical baseline record. Current module/package names and migration
+behavior are documented in [complete project naming](project-naming.md); the
+original decision to retain inherited internal names has been superseded.
+
 This records the initial Bootstrap build. For the newer `1.0.0-bootstrap.1`
 download and language fixes, see [the follow-up verification](download-followup.md).
 
@@ -59,10 +63,10 @@ with 175 actionable tasks. Local execution used the environment/flags below and
 `--daemon --continue` for this final run:
 
 ```sh
-./gradlew :ZalithLauncher:testDebugUnitTest :ZalithLauncher:assembleDebug -Darch=arm64
+./gradlew :VLzyLauncher:testDebugUnitTest :VLzyLauncher:assembleDebug -Darch=arm64
 ```
 
-Output: `ZalithLauncher/build/outputs/apk/debug/VLzyLauncher-Debug-1.0.0-bootstrap-arm64-v8a.apk`
+Output: `VLzyLauncher/build/outputs/apk/debug/VLzyLauncher-Debug-1.0.0-bootstrap-arm64-v8a.apk`
 (216,330,121 bytes). APK SHA-256:
 
 ```text
@@ -77,9 +81,9 @@ version `1.0.0-bootstrap-debug` / `200043`, native ABI `arm64-v8a`.
 On a supported x86_64 SDK host:
 
 ```sh
-./gradlew :ZalithLauncher:testDebugUnitTest :ZalithLauncher:assembleDebug -Darch=arm64
-./gradlew :ZalithLauncher:validateSigningDebug :ZalithLauncher:signingReport
-./gradlew :ZalithLauncher:preReleaseBuild
+./gradlew :VLzyLauncher:testDebugUnitTest :VLzyLauncher:assembleDebug -Darch=arm64
+./gradlew :VLzyLauncher:validateSigningDebug :VLzyLauncher:signingReport
+./gradlew :VLzyLauncher:preReleaseBuild
 ```
 
 The last command must fail if external release credentials are absent.

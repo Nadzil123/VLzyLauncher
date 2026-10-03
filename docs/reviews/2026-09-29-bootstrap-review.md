@@ -8,13 +8,13 @@ Initial verdict: **with fixes**; one Important finding, no Critical or Minor fin
 
 `launcher_name` supplies `BuildKeys.LAUNCHER_IDENTIFIER`. Before the fix, changing
 that name made both `Version` path accessors select `VLzyLauncher/version.config`
-instead of the existing `ZalithLauncher/version.config`. This would create default
+instead of the existing `VLzyLauncher/version.config`. This would create default
 settings for existing shared installations, affecting isolation, custom game paths,
 renderer and JVM options. Export exclusions also used that display identifier.
 
 The implementation now routes both path accessors through
-`LegacyVersionStorage.directoryIn()` and uses its stable directory name for export
-handling. No metadata migration occurs. `LegacyVersionStorageTest` verifies reading
+`VersionStorage.directoryIn()` and uses its stable directory name for export
+handling. No metadata migration occurs. `VersionStorageTest` verifies reading
 an existing config/icon and writing back to the same config without creating a new
 VLzy metadata directory. The ten core/storage tests passed together.
 

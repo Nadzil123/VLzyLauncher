@@ -65,10 +65,10 @@ Command, with the same external host-tool setup documented in
 [Bootstrap verification](bootstrap-verification.md):
 
 ```sh
-./gradlew :ZalithLauncher:testDebugUnitTest :ZalithLauncher:assembleDebug --continue -Darch=arm64
+./gradlew :VLzyLauncher:testDebugUnitTest :VLzyLauncher:assembleDebug --continue -Darch=arm64
 ```
 
-APK: `ZalithLauncher/build/outputs/apk/debug/VLzyLauncher-Debug-1.0.0-bootstrap.1-arm64-v8a.apk`
+APK: `VLzyLauncher/build/outputs/apk/debug/VLzyLauncher-Debug-1.0.0-bootstrap.1-arm64-v8a.apk`
 (216,329,961 bytes). SHA-256:
 
 ```text

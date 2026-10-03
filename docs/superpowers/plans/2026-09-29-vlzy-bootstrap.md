@@ -4,7 +4,7 @@
 
 **Goal:** Establish a branded, attributed VLzy fork, external release signing, and tested core models while retaining the existing launch machinery.
 
-**Architecture:** Preserve modules and the internal namespace. Introduce Android-independent Kotlin types in `com.movtery.zalithlauncher.vlzy`. Reuse Compose Home and About for attribution.
+**Architecture:** Preserve modules and the internal namespace. Introduce Android-independent Kotlin types in `com.nadzil123.vlzylauncher.vlzy`. Reuse Compose Home and About for attribution.
 
 **Tech Stack:** Kotlin/JVM 17, Compose, Gradle 9.5.0, AGP 9.3.0, JUnit 4, GitHub Actions.
 
@@ -31,7 +31,7 @@
 - Base: `b6f0e68966821445607a8819e61ba981f2a55bbb`; original implementation branch `codex/vlzy-bootstrap`.
 - Original validation worktree: `/tmp/vlzy-bootstrap-20260929`. Since 2026-09-30, the primary checkout at `/home/Axelly/Downloads/VLzyLauncher` uses `main` at the user's request, with all local changes preserved.
 - The supplied specification and implementation plan, and the instruction to proceed with Bootstrap, authorize this slice. Execute inline with one independent final review.
-- Run `:ZalithLauncher:testDebugUnitTest` and `:ZalithLauncher:assembleDebug -Darch=arm64`; separate environment blockers from test failures.
+- Run `:VLzyLauncher:testDebugUnitTest` and `:VLzyLauncher:assembleDebug -Darch=arm64`; separate environment blockers from test failures.
 - Keep a progress ledger and record baseline/final verification in `docs/bootstrap-verification.md`.
 
 ### Task 1: Branding and attribution
@@ -48,7 +48,7 @@
 
 ### Task 2: Signing and CI
 
-**Files:** `ZalithLauncher/build.gradle.kts`, module properties, `.gitignore`, build/push/release workflows, signing documentation, inherited keystores.
+**Files:** `VLzyLauncher/build.gradle.kts`, module properties, `.gitignore`, build/push/release workflows, signing documentation, inherited keystores.
 
 **Interfaces:** External `VLZY_RELEASE_STORE_FILE`, `VLZY_RELEASE_STORE_PASSWORD`, `VLZY_RELEASE_KEY_ALIAS`, `VLZY_RELEASE_KEY_PASSWORD`, or matching `vlzyRelease*` Gradle properties. Debug uses the local Android development key. Release CI decodes `VLZY_RELEASE_KEYSTORE_BASE64`.
 

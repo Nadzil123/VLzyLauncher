@@ -1,5 +1,11 @@
 # Branding completion
 
+Historical record for `bootstrap.4`. The owner subsequently clarified that
+internal names and folders must also change. The current behavior is documented
+in [complete project naming](project-naming.md). Commands and source paths below
+have been updated to the current module layout; the test results remain evidence
+for the earlier build only.
+
 The owner reported on 2026-10-01 that the earlier errors were resolved and that
 they played Minecraft to test `bootstrap.3`. They then requested remaining
 launcher branding to use **VLzyLauncher**, with **VLzy Launcher** as the installed
@@ -25,17 +31,10 @@ same stable identifier. No account or data migration is needed for this rename.
 Hard-coded SDL/gamepad log prefixes, the Vulkan capability-probe application name,
 and one Portuguese crash message now identify VLzyLauncher.
 
-Remaining upstream names are intentional:
-
-- Author, fork, library, and license acknowledgements describe their actual sources.
-- Internal packages, JNI bindings, Gradle module paths, renderer-plugin metadata,
-  file-manager storage, and shared version metadata retain compatibility identifiers.
-- Upstream dependency/contributor links refer to those projects. The fork project
-  and release actions already open `Nadzil123/VLzyLauncher`.
-
-In particular, the shared `versions/<version>/ZalithLauncher/` directory remains in
-place so per-version settings and icons survive. Upstream copyright notices and
-the preserved upstream README sections are not renamed to claim VLzy authorship.
+This build originally retained internal package names, JNI bindings, Gradle module
+paths and saved-data filenames. The owner rejected that limited scope on
+2026-10-03. The follow-up renames them together and migrates existing metadata;
+original authorship and external protocol compatibility remain explicit.
 
 ## Supplied artwork (2026-10-02)
 
@@ -76,14 +75,14 @@ No artificial unit tests were added for text substitutions; checks use the actua
 built Android label, signature, packaged resources, existing regression suite, and
 stable-identity consumers. See the [review record](reviews/2026-10-02-branding-review.md).
 
-APK: `ZalithLauncher/build/outputs/apk/debug/VLzyLauncher-Debug-1.0.0-bootstrap.4-arm64-v8a.apk`
+APK: `VLzyLauncher/build/outputs/apk/debug/VLzyLauncher-Debug-1.0.0-bootstrap.4-arm64-v8a.apk`
 (220,125,184 bytes). SHA-256:
 
 ```text
 976ace063f0b197b10a2159724fd97651cc1320bda83efd45688282be85de962
 ```
 
-The final command was `:ZalithLauncher:testDebugUnitTest :ZalithLauncher:assembleDebug
+The final command was `:VLzyLauncher:testDebugUnitTest :VLzyLauncher:assembleDebug
 --continue -Darch=arm64`, using the external host tools described in
 [Bootstrap verification](bootstrap-verification.md). An earlier attempt was
 cancelled by a session restart; the verified final build ran independently of the

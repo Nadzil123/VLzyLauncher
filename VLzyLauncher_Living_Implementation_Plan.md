@@ -91,7 +91,8 @@ Tasks:
 - ARM64 build,
 - smoke test launch flow.
 
-Do not mass-rename namespaces yet.
+The initial namespace-preservation constraint was superseded by the owner's
+2026-10-03 full naming correction; follow the coordinated rename plan below.
 
 ---
 
@@ -130,7 +131,7 @@ TransactionOperation
 TransactionResult
 ```
 
-Use adapters around existing Zalith types.
+Use adapters around the inherited launcher types.
 
 ---
 
@@ -464,7 +465,7 @@ If accepted:
 
 Avoid:
 
-- mass package rename,
+- package renaming without coordinated native/build updates and data migration,
 - huge early Gradle split,
 - moving user data without migration,
 - deleting runtime fallbacks too early,
@@ -522,7 +523,8 @@ recorded in `docs/offline-profiles.md`; changes remain local on `main`.
 2. Move account client-token, controller socket, and game-launch brand consumers
    from the display-name key to the existing stable identifier key.
 3. Replace remaining launcher-owned Zalith log/crash wording and Vulkan probe name.
-4. Preserve upstream acknowledgements, internal namespaces, and saved-data paths.
+4. Preserve upstream acknowledgements. Internal namespace/path preservation was
+   the initial approach; it is superseded by the 2026-10-03 correction below.
 5. Install the owner-supplied logo unchanged, with Android resource wrappers for
    adaptive and fallback icons, and use it in splash/About. Remove obsolete icon
    assets after their replacements exist.
@@ -535,6 +537,45 @@ skipped, and the ARM64 `bootstrap.4` APK built with the exact `VLzy Launcher` la
 Signature and packaged-logo checks passed; old launcher artwork is absent.
 Independent naming and asset reviews have no findings. Artifact details and the
 remaining device-rendering check are in `docs/branding-followup.md`.
+
+## Accepted follow-up — Complete project naming (2026-10-03)
+
+The owner rejected limiting branding to visible UI. Execute on `main`:
+
+1. Rename the app module to `VLzyLauncher` and source namespace to
+   `com.nadzil123.vlzylauncher`, including native JNI, reflection, manifests,
+   shrinker rules, application/bridge classes, themes and Gradle/workflow paths.
+2. Use VLzy names in project-owned headers and English repository documentation,
+   retaining copyright holders and centralizing original-project attribution.
+3. Add regression tests for old/new metadata, destination conflicts, move failure,
+   repeated access and current-game selection. Then implement migration to the
+   new version directory, game-state filename and file-manager preference ID.
+4. Isolate real third-party URLs and legacy plugin/environment keys. Accept the
+   VLzy renderer flag while preserving existing plugin interoperability.
+5. Build `:VLzyLauncher:testDebugUnitTest :VLzyLauncher:assembleDebug -Darch=arm64`;
+   inspect APK identity, native symbols, embedded class paths, signature and logo.
+6. Audit tracked paths/content for unexplained old names, review the full change,
+   and record evidence in `docs/project-naming.md`. GitHub publication remains
+   pending restored write authentication; do not repeat the rejected upload.
+
+Locally verified on 2026-10-03 in the first-alpha build: 114 tests passed, 3 optional
+remote tests skipped, both LWJGL variants rebuilt, and the ARM64 APK passed
+manifest, DEX/JNI, runtime-assets, logo and signature checks. Independent source
+review found no confirmed blockers. See `docs/project-naming.md` for the artifact
+and physical-device upgrade checks still outstanding.
+
+## Accepted release direction — First 1.0.0 alpha (2026-10-03)
+
+1. Finish the complete naming change, including rebuilt LWJGL assets, before
+   claiming the rename is complete.
+2. Set the base version to `1.0.0-alpha.1-20261003`, retaining code `200048`.
+   This replaces the unpublished intermediate `bootstrap.5` build.
+3. Verify the final APK and document the results and remaining device checks.
+4. Commit on `main`; use tag `v1.0.0-alpha.1-20261003` and GitHub release title
+   `VLzyLauncher v1.0.0-alpha.1-20261003` when publication access is available.
+5. Update `VLzyLauncher_CODEX_HANDOFF.md` with the actual completion/publication
+   state. Subsequent development focuses on 1.0.0; later roadmap work remains
+   subject to the living concept/specification and evidence.
 
 ---
 

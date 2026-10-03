@@ -1,5 +1,54 @@
 # VLzyLauncher — Codex Handoff
 
+## Current release direction — 2026-10-03
+
+The complete project rename is implemented and locally verified. Development now
+focuses on **1.0.0**.
+The owner specified the following identity for GitHub publication:
+
+| Field | Value |
+| --- | --- |
+| GitHub release title | `VLzyLauncher v1.0.0-alpha.1-20261003` |
+| Git tag | `v1.0.0-alpha.1-20261003` |
+| Base Android version | `1.0.0-alpha.1-20261003` |
+| Android version code | `200048` |
+| Application display name | `VLzy Launcher` |
+| Branch | `main` |
+
+Debug builds retain the `-debug` version suffix and local development signing.
+This alpha replaces the unpublished intermediate `bootstrap.5`; it does not
+declare the full 1.0.0 roadmap complete. Keep application text and current project
+documentation in English.
+
+Current scope includes the `VLzyLauncher/` module, the
+`com.nadzil123.vlzylauncher` namespace, application/native bridge names, bundled
+LWJGL classes, and migration of existing launcher metadata. Preserve the supplied
+`VLzyLauncher_Logo.png`, existing account identities, game data, and attribution.
+See [complete naming and verification](docs/project-naming.md) for the evidence
+and deliberate compatibility/provenance exceptions.
+
+Local validation completed on 2026-10-03: 114 application tests passed, 3 optional
+remote tests skipped, both LWJGL JARs rebuilt, and the ARM64 debug APK built and
+passed manifest, DEX/JNI, runtime-asset, logo and signature checks. The certificate
+matches the earlier VLzy debug build. Independent source review found no confirmed
+correctness blockers. Artifact filename and SHA-256 are in the verification link
+above; the alpha has not yet been tested on a physical device.
+
+Publication is pending: the previous GitHub integration write returned
+`403: Resource not accessible by integration`, and command-line Git lacked usable
+credentials. Do not describe local commits or APKs as pushed or released. Retry
+publication only after authentication or integration permissions change.
+The latest `gh auth status` check also reports that no GitHub host is logged in.
+Use the prepared [alpha release notes](docs/releases/v1.0.0-alpha.1-20261003.md)
+when the tag and release can be published.
+
+After this slice, prioritize alpha device validation and reliability toward 1.0.0.
+Microsoft sign-in and CurseForge remain unavailable until further notice; offline
+profiles and Modrinth remain the current supported paths. Do not silently expand
+this release into a rewrite of all later roadmap phases.
+
+## Reading order
+
 Read in this order:
 
 1. `VLzyLauncher_Living_Concept.md`

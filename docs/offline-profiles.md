@@ -68,13 +68,13 @@ The final incremental run includes that correction and passed:
 | Availability text | Both exact English sentences verified in valid resource XML |
 | Patch formatting | `git diff --check` passed |
 
-The command was `:ZalithLauncher:testDebugUnitTest :ZalithLauncher:assembleDebug
+The command was `:VLzyLauncher:testDebugUnitTest :VLzyLauncher:assembleDebug
 --continue -Darch=arm64`, using the external host tools described in
 [Bootstrap verification](bootstrap-verification.md). The six account tests extend
 the previously verified 104-test application suite. The three remote tests remain
 opt-in; no public upload tests were enabled.
 
-APK: `ZalithLauncher/build/outputs/apk/debug/VLzyLauncher-Debug-1.0.0-bootstrap.3-arm64-v8a.apk`
+APK: `VLzyLauncher/build/outputs/apk/debug/VLzyLauncher-Debug-1.0.0-bootstrap.3-arm64-v8a.apk`
 (217,358,986 bytes). SHA-256:
 
 ```text

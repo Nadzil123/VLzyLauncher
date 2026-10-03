@@ -46,6 +46,18 @@ Accepted naming — 2026-10-01 (**CORE**, requested by the project owner):
 - Use the owner-supplied green VL/rocket logo as the application artwork, retaining
   the original as `VLzyLauncher_Logo.png` (accepted 2026-10-02).
 
+Scope correction accepted 2026-10-03 (**CORE**, requested by the project owner):
+VLzy identity covers the repository's module folders, source packages, launcher
+classes, native bridges, themes, build instructions and newly written metadata,
+as well as the visible app. Preserve existing user data through migration. Keep
+original authorship and genuine external compatibility references explicit;
+they are not the fork's product identity.
+
+Release direction accepted 2026-10-03 (**CORE**, requested by the project owner):
+finish the complete naming change, then focus development on the 1.0.0 release.
+The first alpha is published as **VLzyLauncher v1.0.0-alpha.1-20261003**. This is
+an alpha milestone toward 1.0.0, not a claim that the full roadmap is complete.
+
 "VeryLazy" does not mean weak, incomplete, careless, or simplistic.
 
 It means:

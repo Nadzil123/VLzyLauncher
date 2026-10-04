@@ -201,15 +201,7 @@ class VMViewModel : ViewModel() {
                 val launcher = GameLauncher(
                     activity = activity,
                     config = config,
-                    onExit = { code, isSignal ->
-                        if (code == 0) {
-                            val finishedCount = AllSettings.finishedGame.getValue()
-                            if (finishedCount < Int.MAX_VALUE)  {
-                                AllSettings.finishedGame.save(finishedCount + 1)
-                            }
-                        }
-                        exitListener(code, isSignal)
-                    },
+                    onExit = exitListener,
                     openPath = { folder ->
                         _openFolderOperation.update {
                             OpenFolderOperation.OpenFolder(folder)

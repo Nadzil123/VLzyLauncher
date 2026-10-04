@@ -436,11 +436,6 @@ object AllSettings : SettingsRegistry() {
     val backgroundBlurType = enumSetting("backgroundBlurType", BackgroundBlur.Background)
 
     /**
-     * 启动器上次检查更新时，用户选择忽略的版本号
-     */
-    val lastIgnoredVersion = intSetting("lastIgnoredVersion", null)
-
-    /**
      * 启动器日志保留天数
      */
     val launcherLogRetentionDays = intSetting("launcherLogRetentionDays", 7, 1..14)
@@ -579,21 +574,6 @@ object AllSettings : SettingsRegistry() {
      * 陶瓦联机公告版本号
      */
     val terracottaNoticeVer = intSetting("terracottaNoticeVer", -1)
-
-    /**
-     * 上次检查更新的时间戳
-     */
-    val lastUpgradeCheck = longSetting("lastUpgradeCheck", 0L)
-
-    /**
-     * 玩家结束运行游戏的次数
-     */
-    val finishedGame = intSetting("finishedGame", 0)
-
-    /**
-     * 是否在打开启动器时，根据特定的运行游戏次数，显示赞助支持弹窗
-     */
-    val showSponsorship = boolSetting("showSponsorship", true)
 
     /**
      * 搜索模组的初始搜索平台

@@ -816,8 +816,6 @@
     <string name="control_editor_exit_confirm">Выйти без сохранения</string>
     <string name="about_launcher_title">О лаунчере</string>
     <string name="about_launcher_version">Версия лаунчера: %s</string>
-    <string name="about_launcher_author_movtery_title">MovTery</string>
-    <string name="about_launcher_author_movtery_text">Автор %s</string>
     <string name="about_launcher_project_link">Ссылка на проект</string>
     <string name="about_sponsor">Спонсорская поддержка</string>
     <string name="about_acknowledgements_title">Благодарности</string>
@@ -849,8 +847,6 @@
     <string name="saves_manage_import_failed">При импорте мира произошла ошибка</string>
     <string name="about_acknowledgements_github_community">Сообщество GitHub</string>
     <string name="about_acknowledgements_github_community_text">Все, кто сообщал о проблемах и вносил свой вклад в развитие проекта на GitHub.</string>
-    <string name="about_acknowledgements_weblate_community">Сообщество Weblate</string>
-    <string name="about_acknowledgements_weblate_community_text">Все переводчики, принявшие участие в локализации проекта</string>
     <string name="file_invalid_leading_or_trailing_space">Не может начинаться или заканчиваться пробелом!</string>
     <string name="mods_update">Обновить моды</string>
     <string name="mods_update_warning_1">Перед проверкой модов на обновления учтите: обновление большого количества модов может вызвать совместимости и привести к проблемам на ранее стабильной сборке.</string>
@@ -1056,7 +1052,6 @@
     <string name="unpack_screen_jre25">Необходимая Java 25 (для Minecraft 26.1 и выше).</string>
     <string name="download_install_warning_mobile_data">Вы используете мобильный интернет. Продолжение скачивания может использовать ваш трафик.</string>
     <string name="version_summary_fools_2_0">Мы не будем их обновлять! Если вы обнаружили ошибку, вам просто не повезло! XD</string>
-    <string name="game_saponsorship_finished_game">Лаунчер успешно запустил игру %s раз! Если он вам нравится, пожалуйста, поддержите разработчика! &gt;w&lt;</string>
     <string name="page_title_version_manage">Менеджер сборок</string>
     <string name="page_title_account_list">Учётная запись</string>
     <string name="page_title_select_files">Выбрать путь</string>

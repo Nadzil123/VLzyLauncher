@@ -62,6 +62,32 @@ class JVMSocketServerTest {
 
     private fun unusedPort(): Int = DatagramSocket(0, loopback).use { it.localPort }
 
+    @Test
+    fun `rapid installer restarts fully release the listener port`() = runBlocking {
+        val port = unusedPort()
+        repeat(200) { attempt ->
+            val exit = CompletableDeferred<String>()
+            JVMSocketServer.start(port = port) { exit.complete(it) }
+            sendExit(port, attempt.toString())
+            assertEquals(attempt.toString(), withTimeout(5_000) { exit.await() })
+            JVMSocketServer.stop()
+            DatagramSocket(port, loopback).use { assertEquals(port, it.localPort) }
+        }
+    }
+
+    @Test
+    fun `receive callback can stop and release its own listener`() = runBlocking {
+        val port = unusedPort()
+        val stopped = CompletableDeferred<String>()
+        JVMSocketServer.start(port = port) { message ->
+            JVMSocketServer.stop()
+            stopped.complete(message)
+        }
+        sendExit(port, "0")
+        assertEquals("0", withTimeout(5_000) { stopped.await() })
+        DatagramSocket(port, loopback).use { assertEquals(port, it.localPort) }
+    }
+
     private fun sendExit(port: Int, code: String) {
         DatagramSocket().use { sender ->
             val bytes = code.toByteArray()

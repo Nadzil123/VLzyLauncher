@@ -58,6 +58,23 @@ finish the complete naming change, then focus development on the 1.0.0 release.
 The first alpha is published as **VLzyLauncher v1.0.0-alpha.1-20261003**. This is
 an alpha milestone toward 1.0.0, not a claim that the full roadmap is complete.
 
+Independent project ownership accepted 2026-10-04 (**CORE**, owner request):
+VLzyLauncher is created and maintained by **Nadzil123** as an independent project.
+Its code provenance is an independently maintained **hard fork of ZalithLauncher2**,
+as clarified by the owner. It remains an **unofficial Minecraft: Java Edition
+launcher**. The VLzy Concept and Specification govern its direction, features,
+architecture and releases; changes do not require following the original project's
+roadmap or synchronizing with it. Inherited code keeps its provenance and licenses.
+About, support, contributions and release entry points must reflect that ownership.
+Original-code authors belong in accurate acknowledgements and license notices;
+they must not appear as the creator of VLzyLauncher. Retire unused original-project
+update feeds and automatic upstream sponsorship prompts. Existing data migration
+and optional third-party runtime/plugin compatibility remain supported.
+
+Verification follow-up (**CORE**, 2026-10-04): installer communication must remain
+reliable across immediate stop/start cycles, including complete release of the
+previous listener's port before a new installer starts.
+
 "VeryLazy" does not mean weak, incomplete, careless, or simplistic.
 
 It means:

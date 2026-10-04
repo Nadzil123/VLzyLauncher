@@ -368,8 +368,6 @@
     <string name="account_logging_not_purchased_minecraft">Propriedade do Minecraft não verificada. Compre no site oficial do Minecraft.</string>
     <string name="about_launcher_title">Sobre o launcher</string>
     <string name="about_launcher_version">Versão do launcher: %s</string>
-    <string name="about_launcher_author_movtery_title">MovTery</string>
-    <string name="about_launcher_author_movtery_text">Autor de %s</string>
     <string name="about_launcher_project_link">Link do projeto</string>
     <string name="about_sponsor">Apoiar</string>
     <string name="about_acknowledgements_mcmod">MCMod (mcmod.cnc)</string>
@@ -785,7 +783,6 @@
     <string name="settings_control_gyroscope_invert_x_title">Inverter Eixo X</string>
     <string name="settings_control_gyroscope_invert_y_title">Inverter Eixo Y</string>
     <string name="about_acknowledgements_github_community">Comunidade do Github</string>
-    <string name="about_acknowledgements_weblate_community">Comunidade do Weblate</string>
     <string name="mods_update">Atualizar Mods</string>
     <string name="mods_update_success">Atualização Bem-sucedido</string>
     <string name="settings_control_mouse_pointer_hotspot">Definir Ponto Focal</string>
@@ -888,7 +885,6 @@
     <string name="game_menu_option_hotbar_long_click">Pressione e segure para soltar o elemento selecionado</string>
     <string name="game_menu_option_hotbar_long_click_delay">Atraso de ativação da barra de atalhos ao pressionar e segurar</string>
     <string name="game_menu_option_show_menu">Ativar menu flutuante</string>
-    <string name="game_saponsorship_finished_game">O launcher iniciou o jogo com sucesso %s vezes! Se o achar útil, considere apoiar o programador! :)</string>
     <string name="game_vulkan_check_title">Verificar Vulkan</string>
     <string name="game_vulkan_check_text">Verifique se o seu dispositivo é compatível com a execução do Minecraft 26.2 ou superior com Vulkan. Os resultados são apenas para referência.</string>
     <string name="game_vulkan_check_version">Versão do Vulkan: %s</string>
@@ -1163,7 +1159,6 @@
     <string name="control_editor_special_joystick_style_joystick_size">Tamanho do joystick</string>
     <string name="about_acknowledgements_mcim_text">%s usa a fonte espelho MCIM</string>
     <string name="about_acknowledgements_github_community_text">Todos os autores de relatórios de problemas e colaboradores da comunidade GitHub</string>
-    <string name="about_acknowledgements_weblate_community_text">Todos os tradutores que participaram da tradução de idiomas da comunidade</string>
     <string name="upgrade_title">Verificar atualizações</string>
     <string name="upgrade_new">Nova versão encontrada</string>
     <string name="upgrade_more">Visualizar</string>

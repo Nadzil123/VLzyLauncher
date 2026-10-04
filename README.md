@@ -3,10 +3,12 @@
 <img src="VLzyLauncher_Logo.png" alt="VLzyLauncher logo" width="160" height="160">
 
 **VLzy Launcher** (VeryLazy Launcher) is an independent, unofficial Minecraft:
-Java Edition launcher for Android. The interface defaults to English.
+Java Edition launcher for Android, created and maintained by
+[Nadzil123](https://github.com/Nadzil123). The interface defaults to English.
 
-The project builds on established open-source launcher technology. Original
-authors, project provenance and redistribution notices are preserved in
+VLzyLauncher develops independently according to its own Concept and Specification.
+Its code originates as a hard fork of ZalithLauncher2. Original authors, project
+provenance and redistribution notices are preserved in
 [UPSTREAM_NOTICE.md](UPSTREAM_NOTICE.md) and [LICENSE](LICENSE). VLzyLauncher is
 not affiliated with Mojang or Microsoft.
 
@@ -52,9 +54,14 @@ in this repository.
 - [Ecosystem research protocol](VLzyLauncher_Ecosystem_Research_Protocol.md)
 - [Agent handoff](VLzyLauncher_CODEX_HANDOFF.md)
 - [Complete naming and data migration](docs/project-naming.md)
+- [Independent project and About](docs/independent-project.md)
 - [Offline profiles](docs/offline-profiles.md)
 - [Branding and supplied logo](docs/branding-followup.md)
 
-Use [GitHub issues](https://github.com/Nadzil123/VLzyLauncher/issues) for this
-fork's reports and [releases](https://github.com/Nadzil123/VLzyLauncher/releases)
-for published builds.
+Use [GitHub issues](https://github.com/Nadzil123/VLzyLauncher/issues) for reports,
+[CONTRIBUTING.md](CONTRIBUTING.md) for code and translation contributions, and
+[releases](https://github.com/Nadzil123/VLzyLauncher/releases) for published builds.
+About links to these VLzyLauncher destinations and identifies Nadzil123 as the
+project creator and maintainer. The app has no automatic upstream launcher
+updater or sponsorship popup. Optional plugins still use their actual
+third-party providers.

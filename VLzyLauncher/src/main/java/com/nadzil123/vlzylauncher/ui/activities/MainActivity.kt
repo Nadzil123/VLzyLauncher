@@ -54,15 +54,13 @@ import com.nadzil123.vlzylauncher.game.version.installed.Version
 import com.nadzil123.vlzylauncher.game.version.installed.VersionsManager
 import com.nadzil123.vlzylauncher.notification.NotificationManager
 import com.nadzil123.vlzylauncher.path.PathManager
-import com.nadzil123.vlzylauncher.path.URL_PROJECT
-import com.nadzil123.vlzylauncher.path.URL_SUPPORT
+import com.nadzil123.vlzylauncher.path.URL_RELEASES
 import com.nadzil123.vlzylauncher.setting.AllSettings
 import com.nadzil123.vlzylauncher.ui.AndroidStringText
 import com.nadzil123.vlzylauncher.ui.androidText
 import com.nadzil123.vlzylauncher.ui.base.BaseAppCompatActivity
 import com.nadzil123.vlzylauncher.ui.base.ObserveFullScreenSetting
 import com.nadzil123.vlzylauncher.ui.buildAppendedText
-import com.nadzil123.vlzylauncher.ui.components.SimpleAlertDialog
 import com.nadzil123.vlzylauncher.ui.guide.NextTipLabel
 import com.nadzil123.vlzylauncher.ui.guide.rememberAppGuides
 import com.nadzil123.vlzylauncher.ui.screens.NestedNavKey
@@ -96,8 +94,6 @@ import com.nadzil123.vlzylauncher.viewmodel.BackgroundViewModel
 import com.nadzil123.vlzylauncher.viewmodel.ErrorViewModel
 import com.nadzil123.vlzylauncher.viewmodel.EventViewModel
 import com.nadzil123.vlzylauncher.viewmodel.LaunchGameViewModel
-import com.nadzil123.vlzylauncher.viewmodel.LauncherUpgradeOperation
-import com.nadzil123.vlzylauncher.viewmodel.LauncherUpgradeViewModel
 import com.nadzil123.vlzylauncher.viewmodel.LogShareViewModel
 import com.nadzil123.vlzylauncher.viewmodel.LogsUploadViewModel
 import com.nadzil123.vlzylauncher.viewmodel.ModpackConfirmUseMobileDataOperation
@@ -155,11 +151,6 @@ class MainActivity : BaseAppCompatActivity() {
     val modpackImportViewModel: ModpackImportViewModel by viewModels()
 
     /**
-     * 启动器更新状态 ViewModel
-     */
-    val launcherUpgradeViewModel: LauncherUpgradeViewModel by viewModels()
-
-    /**
      * 游戏日志分享菜单 ViewModel
      */
     private val logShareViewModel: LogShareViewModel by viewModels()
@@ -187,7 +178,7 @@ class MainActivity : BaseAppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //处理外部导入
-        val isImporting = handleImportIfNeeded(intent)
+        handleImportIfNeeded(intent)
 
         //加载渲染器
         Renderers.init()
@@ -200,9 +191,6 @@ class MainActivity : BaseAppCompatActivity() {
 
         //初始化通知管理（创建渠道）
         NotificationManager.initManager(this)
-
-        // Bootstrap uses the fork's releases page. The inherited automatic updater
-        // serves upstream APKs and must not offer them as VLzy updates.
 
         //错误信息展示
         lifecycleScope.launch {
@@ -286,9 +274,6 @@ class MainActivity : BaseAppCompatActivity() {
                 }
             }
         }
-
-        val finishedGame = AllSettings.finishedGame
-        val showSponsorship = AllSettings.showSponsorship
 
         val festivals = getTodayFestivals(
             containsChinese = isChinese(this@MainActivity)
@@ -375,24 +360,6 @@ class MainActivity : BaseAppCompatActivity() {
                     }
                 }
 
-                //显示赞助支持的小弹窗
-                if (!isImporting && finishedGame.state >= 100 && showSponsorship.state) {
-                    SimpleAlertDialog(
-                        title = stringResource(R.string.about_sponsor),
-                        text = stringResource(R.string.game_saponsorship_finished_game, finishedGame.state),
-                        dismissText = stringResource(R.string.generic_close),
-                        onDismiss = {
-                            showSponsorship.save(false)
-                        },
-                        onConfirm = {
-                            showSponsorship.save(false)
-                            eventViewModel.sendEvent(
-                                EventViewModel.Event.OpenLink(URL_SUPPORT)
-                            )
-                        }
-                    )
-                }
-
                 ModpackImportOperation(
                     operation = modpackImportViewModel.importOperation,
                     changeOperation = { modpackImportViewModel.importOperation = it },
@@ -466,16 +433,6 @@ class MainActivity : BaseAppCompatActivity() {
                     }
                 )
 
-                //检查更新操作流程
-                LauncherUpgradeOperation(
-                    operation = launcherUpgradeViewModel.operation,
-                    onChanged = { launcherUpgradeViewModel.operation = it },
-                    onIgnoredClick = { ver ->
-                        AllSettings.lastIgnoredVersion.save(ver)
-                    },
-                    onLinkClick = { eventViewModel.sendEvent(EventViewModel.Event.OpenLink(it)) }
-                )
-
                 val vcOperation by vulkanCheckerViewModel.vcOperation.collectAsStateWithLifecycle()
                 VulkanChecker(
                     operation = vcOperation,
@@ -538,7 +495,7 @@ class MainActivity : BaseAppCompatActivity() {
      * 检查启动器更新
      */
     private fun checkUpdate() {
-        openLink("$URL_PROJECT/releases")
+        openLink(URL_RELEASES)
     }
 
     /**

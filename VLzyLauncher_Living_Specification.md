@@ -80,6 +80,33 @@ Release identity — owner instruction accepted 2026-10-03:
 - Record verified work, remaining release checks and the 1.0.0 focus in
   `VLzyLauncher_CODEX_HANDOFF.md`. Work and publication use `main`.
 
+Independent project identity — owner instruction accepted 2026-10-04:
+
+- Retain the explicit `unofficial Minecraft: Java Edition launcher` description.
+  VLzyLauncher is an independent project and an independently maintained hard
+  fork of ZalithLauncher2. Use `hard fork` for code provenance rather than `port`.
+- VLzy's own Concept and Specification govern development. Project identity,
+  releases and contribution routing are independent; no upstream synchronization
+  workflow is required. Preserve accurate original-code credits and licenses.
+- About shall identify `Nadzil123` as the creator and maintainer of `VLzyLauncher`.
+- Verification found an existing UDP restart race: socket closure can precede
+  completion of a blocked receive operation. Installer shutdown shall wait for
+  that receive operation to unwind before reusing the port, preserve exclusive
+  binding, and remain safe when called from a receive callback.
+- Project, releases, issue reporting, contribution instructions and license links
+  shall use `Nadzil123/VLzyLauncher`; the creator profile shall use `Nadzil123`.
+- Original-project authors and translators remain clearly labelled acknowledgements,
+  with their actual provenance and licenses. Do not relabel their work as original
+  VLzy code or send VLzy support/contribution actions to their project.
+- Remove the unused upstream launcher-update implementation and its metadata/mirror
+  endpoints. Launcher updates remain the user-invoked VLzy releases page.
+- Remove the inherited automatic sponsor popup and its launcher-level support URL.
+  Do not invent a donation account for the owner.
+- Keep existing version/account/game data, legacy migration keys and external-plugin
+  protocols compatible. Optional third-party plugin sources must be identified as
+  external sources, not a VLzy-owned distribution service.
+- New ownership text is English, consistent with the established language default.
+
 ---
 
 # 3. Instance Requirements

@@ -436,7 +436,6 @@
     <string name="game_menu_option_show_menu">开启菜单悬浮窗</string>
     <string name="game_menu_option_show_menu_hided">已关闭游戏菜单悬浮窗，您可以通过系统返回键调用游戏菜单</string>
     <string name="game_menu_option_controls_opacity">控制布局不透明度</string>
-    <string name="game_saponsorship_finished_game">启动器已经成功运行了 %s 次游戏！如果您觉得好用的话，可以考虑赞助支持一下作者喔！qwq</string>
     <string name="game_vulkan_check_title">Vulkan 检测</string>
     <string name="game_vulkan_check_text">检查您的设备是否支持使用 Vulkan 运行 Minecraft 26.2+，结果仅供参考。</string>
     <string name="game_vulkan_check_version">Vulkan 版本：%s</string>
@@ -1250,8 +1249,6 @@
     <!--  关于  -->
     <string name="about_launcher_title">关于启动器</string>
     <string name="about_launcher_version">启动器版本：%s</string>
-    <string name="about_launcher_author_movtery_title">墨北MovTery</string>
-    <string name="about_launcher_author_movtery_text">%s 的作者</string>
     <string name="about_launcher_project_link">项目地址</string>
     <string name="about_sponsor">赞助支持</string>
     <string name="about_acknowledgements_title">鸣谢</string>
@@ -1265,8 +1262,6 @@
     <string name="about_acknowledgements_mcim_text">%s 使用了 MCIM 镜像源</string>
     <string name="about_acknowledgements_github_community">GitHub 社区</string>
     <string name="about_acknowledgements_github_community_text">GitHub 社区的所有议题提出者和贡献者</string>
-    <string name="about_acknowledgements_weblate_community">Weblate 社区</string>
-    <string name="about_acknowledgements_weblate_community_text">所有参与社区语言本地化的翻译者</string>
     <string name="about_plugin_title">已加载的插件</string>
     <string name="about_library_title">额外引入的依赖项目</string>
     <!--  检查更新  -->

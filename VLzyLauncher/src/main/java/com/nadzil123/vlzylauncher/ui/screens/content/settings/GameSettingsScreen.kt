@@ -185,7 +185,8 @@ fun GameSettingsScreen(
                                 }
                             },
                             title = stringResource(R.string.settings_game_native_lib_plugin_title),
-                            summary = stringResource(R.string.settings_game_native_lib_plugin_summary),
+                            summary = stringResource(R.string.settings_game_native_lib_plugin_summary) +
+                                    "\n" + stringResource(R.string.vlzy_native_plugins_external),
                             getItemID = { it.packageName },
                             getItemText = { it.displayName },
                             getItemSummary = { plugin ->
@@ -201,7 +202,8 @@ fun GameSettingsScreen(
                             modifier = Modifier.fillMaxWidth(),
                             position = CardPosition.Middle,
                             title = stringResource(R.string.settings_game_native_lib_plugin_title),
-                            summary = stringResource(R.string.settings_game_native_lib_plugin_summary),
+                            summary = stringResource(R.string.settings_game_native_lib_plugin_summary) +
+                                    "\n" + stringResource(R.string.vlzy_native_plugins_external),
                             onClick = {},
                             trailingIcon = {
                                 DLNativeLibsButton()

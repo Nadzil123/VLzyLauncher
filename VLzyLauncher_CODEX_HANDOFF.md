@@ -1,5 +1,35 @@
 # VLzyLauncher — Codex Handoff
 
+## Current follow-up — 2026-10-04
+
+The owner's final clarification is that VLzyLauncher develops as an **independent
+project**, with **hard-fork provenance from ZalithLauncher2** and accurate original
+code credits. It remains an **unofficial Minecraft: Java Edition launcher**.
+Nadzil123 is the creator and maintainer of VLzyLauncher. Its own Concept and
+Specification govern development, rather than the original project's roadmap.
+
+This follow-up implements the updated About/profile/support/contribution links,
+removes the unused upstream update client and automatic sponsorship prompt, and
+labels optional plugin providers as third parties. See
+[independent project verification](docs/independent-project.md) and
+[CONTRIBUTING.md](CONTRIBUTING.md). Final verification passed: **116 application
+tests passed, 3 optional remote tests skipped**, ARM64 debug APK built, and
+packaged resources/URLs, manifest, namespaces, JNI, bundled runtimes, logo and
+unchanged signing identity verified. Independent identity and socket reviews
+found no confirmed issues. The artifact hash is in the verification report;
+the release identity below is unchanged.
+
+Full-suite verification exposed and corrected an existing UDP installer restart
+race: stop now waits for active reception to unwind before the port is reused.
+Coverage includes 200 rapid restart cycles, occupied-port rejection and stopping
+from the receive callback. Physical-device validation remains outstanding.
+
+The prior rename was pushed successfully through `d46d90dd` on `origin/main`.
+Remote access has since changed: `git fetch origin main` reports `Repository not
+found`, and GitHub API repository lookup also fails despite an active Nadzil123
+login. Confirm the current repository URL/access before claiming this follow-up
+is pushed. No tag, GitHub release or APK upload has been performed.
+
 ## Current release direction — 2026-10-03
 
 The complete project rename is implemented and locally verified. Development now
@@ -34,11 +64,11 @@ matches the earlier VLzy debug build. Independent source review found no confirm
 correctness blockers. Artifact filename and SHA-256 are in the verification link
 above; the alpha has not yet been tested on a physical device.
 
-GitHub CLI authentication was restored on 2026-10-03: `gh auth status` confirms
+GitHub CLI authentication was restored on 2026-10-03: `gh auth status` confirmed
 the active `Nadzil123` account with repository and workflow access. The owner
 authorized pushing `main`. The earlier missing-credentials/403 publication blocker
-is historical; use the authenticated Git path and verify the remote commit after
-pushing. A branch push does not itself publish a GitHub release or upload an APK.
+is historical; the new repository-lookup failure is recorded above. Verify the
+remote commit after pushing. A branch push does not itself publish a GitHub release or upload an APK.
 Use the prepared [alpha release notes](docs/releases/v1.0.0-alpha.1-20261003.md)
 for the separately published alpha tag and release; check GitHub for their status.
 

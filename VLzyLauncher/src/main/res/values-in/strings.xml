@@ -723,8 +723,6 @@
     <string name="control_editor_exit_confirm">Langsung Keluar</string>
     <string name="about_launcher_title">Tentang Launcher</string>
     <string name="about_launcher_version">Versi Launcher: %s</string>
-    <string name="about_launcher_author_movtery_title">MovTery</string>
-    <string name="about_launcher_author_movtery_text">Pembuat %s</string>
     <string name="about_launcher_project_link">Link Project</string>
     <string name="about_sponsor">Dukung Dengan Sponsor</string>
     <string name="about_acknowledgements_title">Ucapan Terima Kasih Kepada</string>
@@ -798,8 +796,6 @@
     <string name="settings_control_gyroscope_invert_y_summary">Saat diaktifkan, memutar perangkat ke atas atau ke bawah akan mengontrol kamera ke arah yang berlawanan</string>
     <string name="about_acknowledgements_github_community">Komunitas GitHub</string>
     <string name="about_acknowledgements_github_community_text">Semua pelapor masalah dan kontributor dari komunitas GitHub</string>
-    <string name="about_acknowledgements_weblate_community">Komunitas Weblate</string>
-    <string name="about_acknowledgements_weblate_community_text">Semua penerjemah yang berpartisipasi dalam lokalisasi project</string>
     <string name="versions_config_microphone_check_title">Periksa Mikrofon</string>
     <string name="saves_manage_import_unpacking">Membongkar dunia: %s</string>
     <string name="saves_manage_import_failed">Terjadi kesalahan saat mengimpor dunia</string>
@@ -1046,7 +1042,6 @@
     <string name="servers_list_edit_server">Ubah Server</string>
     <string name="servers_list_copy_server_address">Salin Alamat</string>
     <string name="download_install_warning_mobile_data">Anda sedang menggunakan data seluler. Melanjutkan unduhan akan mengonsumsi kuota data.</string>
-    <string name="game_saponsorship_finished_game">Launcher sudah berhasil menjalankan game sebanyak %s kali! Kalau kamu merasa terbantu, silakan pertimbangkan untuk mendukung developernya! :)</string>
     <string name="versions_export">Ekspor Modpack</string>
     <string name="versions_export_type_mcbbs">MCBBS Modpack</string>
     <string name="versions_export_type_mcbbs_summary">Dapat diimpor oleh %s, HMCL, dan launcher lainnya</string>
@@ -1434,6 +1429,6 @@
     <string name="guide_tip_blank">Ketuk area kosong mana pun untuk lanjut ke langkah berikutnya</string>
     <string name="guide_tip_finish">Ketuk area kosong mana pun untuk mengakhiri panduan</string>
     <string name="vlzy_launcher_tagline">VeryLazy Launcher</string>
-    <string name="vlzy_fork_attribution">VLzyLauncher is an independent, unofficial Minecraft: Java Edition launcher. Original authors are credited in About.</string>
+    <string name="vlzy_fork_attribution">VLzyLauncher is an unofficial Minecraft: Java Edition launcher, independently maintained by Nadzil123. Not affiliated with Mojang or Microsoft. Open-source credits are listed in About.</string>
     <string name="vlzy_releases">Rilis VLzy</string>
 </resources>

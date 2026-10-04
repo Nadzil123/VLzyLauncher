@@ -42,6 +42,7 @@ object JVMSocketServer {
 
     private var scope: CoroutineScope? = null
     private var socket: DatagramSocket? = null
+    private val receiveLock = Any()
 
     /**
      * 上一次接收的消息
@@ -77,7 +78,9 @@ object JVMSocketServer {
             while (isActive) {
                 try {
                     packet.length = bytes.size
-                    listener.receive(packet)
+                    synchronized(receiveLock) {
+                        listener.receive(packet)
+                    }
                     val receiveMsg = String(packet.data, packet.offset, packet.length)
                     Logger.info(TAG, "receive msg: $receiveMsg")
                     synchronized(this@JVMSocketServer) {
@@ -113,6 +116,9 @@ object JVMSocketServer {
         scope = null
         listener?.let {
             it.close()
+            // Some runtimes defer releasing the port until receive() unwinds.
+            // Wait only for that I/O operation: callbacks may call stop() themselves.
+            synchronized(receiveLock) { }
             Logger.info(TAG, "Socket server $ip:$port stopped!")
         }
     }

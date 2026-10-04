@@ -82,7 +82,7 @@ themes, current instructions and headers use the new names. The owner-supplied
   or bundled class namespaces. Git's check of introduced whitespace also passed
   with file moves recognized as renames.
 
-Final local artifact (ARM64 debug):
+Verified 2026-10-03 artifact (ARM64 debug, before the About ownership follow-up):
 
 ```text
 VLzyLauncher/build/outputs/apk/debug/VLzyLauncher-Debug-1.0.0-alpha.1-20261003-arm64-v8a.apk
@@ -91,6 +91,10 @@ Application ID: com.nadzil123.vlzylauncher.debug
 Size: 217334961 bytes
 SHA-256: cfae3a5f6ff42d4d3ceb4c84a3414a9c319c7209da9d1e95ca1730393c55cf64
 ```
+
+The [independent project follow-up](independent-project.md) records subsequent About
+and project-link changes and their verification. The same alpha filename may be
+rebuilt during this unpublished release; use its recorded hash to identify an APK.
 
 Physical-device follow-up must cover an in-place update, home-screen launch,
 selected version/favorites, file-manager preferences and a Minecraft session.

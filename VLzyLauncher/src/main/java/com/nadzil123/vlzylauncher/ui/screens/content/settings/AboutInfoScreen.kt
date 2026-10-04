@@ -62,12 +62,14 @@ import com.nadzil123.vlzylauncher.game.plugin.PluginLoader
 import com.nadzil123.vlzylauncher.game.plugin.appCacheIcon
 import com.nadzil123.vlzylauncher.library.LibraryInfo
 import com.nadzil123.vlzylauncher.library.libraryData
+import com.nadzil123.vlzylauncher.path.URL_AUTHOR
 import com.nadzil123.vlzylauncher.path.URL_COMMUNITY
-import com.nadzil123.vlzylauncher.path.UpstreamReferences
+import com.nadzil123.vlzylauncher.path.URL_CONTRIBUTING
+import com.nadzil123.vlzylauncher.path.URL_ISSUES
+import com.nadzil123.vlzylauncher.path.URL_LICENSE
 import com.nadzil123.vlzylauncher.path.URL_MCMOD
 import com.nadzil123.vlzylauncher.path.URL_PROJECT
-import com.nadzil123.vlzylauncher.path.URL_SUPPORT
-import com.nadzil123.vlzylauncher.path.URL_WEBLATE
+import com.nadzil123.vlzylauncher.path.UpstreamReferences
 import com.nadzil123.vlzylauncher.ui.base.BaseScreen
 import com.nadzil123.vlzylauncher.ui.components.AnimatedLazyColumn
 import com.nadzil123.vlzylauncher.ui.components.CardTitleLayout
@@ -129,17 +131,33 @@ fun AboutInfoScreen(
                             }
                         )
 
-                        ButtonIconItem(
-                            icon = painterResource(R.drawable.img_avatar_movtery),
-                            title = stringResource(R.string.about_launcher_author_movtery_title),
-                            text = stringResource(R.string.about_launcher_author_movtery_text, UpstreamReferences.PROJECT_NAME),
-                            button = {
-                                Button(
-                                    onClick = { openLink(URL_SUPPORT) }
-                                ) {
-                                    Text(text = stringResource(R.string.about_sponsor))
-                                }
-                            }
+                        LinkIconItem(
+                            icon = painterResource(R.drawable.ic_person_outlined),
+                            title = stringResource(R.string.vlzy_project_author),
+                            text = stringResource(R.string.vlzy_project_author_description),
+                            openLink = { openLink(URL_AUTHOR) },
+                            useImage = false
+                        )
+                        LinkIconItem(
+                            icon = painterResource(R.drawable.ic_chat_info),
+                            title = stringResource(R.string.vlzy_report_issue),
+                            text = stringResource(R.string.vlzy_report_issue_description),
+                            openLink = { openLink(URL_ISSUES) },
+                            useImage = false
+                        )
+                        LinkIconItem(
+                            icon = painterResource(R.drawable.ic_code),
+                            title = stringResource(R.string.vlzy_contribute),
+                            text = stringResource(R.string.vlzy_contribute_description),
+                            openLink = { openLink(URL_CONTRIBUTING) },
+                            useImage = false
+                        )
+                        LinkIconItem(
+                            icon = painterResource(R.drawable.ic_copyright_outlined),
+                            title = stringResource(R.string.vlzy_project_license),
+                            text = stringResource(R.string.vlzy_project_license_description),
+                            openLink = { openLink(URL_LICENSE) },
+                            useImage = false
                         )
                     }
                 }
@@ -151,6 +169,13 @@ fun AboutInfoScreen(
                     title = stringResource(R.string.about_acknowledgements_title)
                 ) {
                     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                        LinkIconItem(
+                            icon = painterResource(R.drawable.ic_code),
+                            title = UpstreamReferences.PROJECT_NAME,
+                            text = stringResource(R.string.vlzy_original_code_credit),
+                            openLink = { openLink(UpstreamReferences.PROJECT_REPOSITORY) },
+                            useImage = false
+                        )
                         ButtonIconItem(
                             icon = painterResource(R.drawable.img_avatar_bangbang93),
                             title = "bangbang93",
@@ -216,10 +241,11 @@ fun AboutInfoScreen(
                             useImage = false
                         )
                         LinkIconItem(
-                            icon = painterResource(R.drawable.img_platform_weblate),
-                            title = stringResource(R.string.about_acknowledgements_weblate_community),
-                            text = stringResource(R.string.about_acknowledgements_weblate_community_text),
-                            openLink = { openLink(URL_WEBLATE) }
+                            icon = painterResource(R.drawable.ic_text_format),
+                            title = stringResource(R.string.vlzy_translation_contributors),
+                            text = stringResource(R.string.vlzy_translation_contributors_description),
+                            openLink = { openLink(URL_CONTRIBUTING) },
+                            useImage = false
                         )
                     }
                 }

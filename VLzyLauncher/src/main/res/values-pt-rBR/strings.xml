@@ -1014,8 +1014,6 @@
     <string name="control_editor_exit_confirm">Sair sem salvar</string>
     <string name="about_launcher_title">Sobre o Launcher</string>
     <string name="about_launcher_version">Versão do Launcher: %s</string>
-    <string name="about_launcher_author_movtery_title">MovTery</string>
-    <string name="about_launcher_author_movtery_text">Autor de %s</string>
     <string name="about_launcher_project_link">Link do Projeto</string>
     <string name="about_sponsor">Apoio de patrocínio</string>
     <string name="about_acknowledgements_title">Agradecimentos</string>
@@ -1029,8 +1027,6 @@
     <string name="about_acknowledgements_mcim_text">%s usa a fonte espelho MCIM</string>
     <string name="about_acknowledgements_github_community">Comunidade no GitHub</string>
     <string name="about_acknowledgements_github_community_text">Todos os autores de relatórios de problemas e colaboradores da comunidade GitHub</string>
-    <string name="about_acknowledgements_weblate_community">Comunidade do Weblate</string>
-    <string name="about_acknowledgements_weblate_community_text">Todos os tradutores que participaram da tradução de idiomas da comunidade</string>
     <string name="about_plugin_title">Plugins carregados</string>
     <string name="about_library_title">Bibliotecas externas</string>
     <string name="upgrade_title">Verificar atualizações</string>
@@ -1046,7 +1042,6 @@
     <string name="upgrade_cloud_drive">Espaço em nuvem</string>
     <string name="url_wiki_minecraft_game_release">https://pt.minecraft.wiki/w/Edição_Java_%s</string>
     <string name="download_install_warning_mobile_data">Você está usando dados móveis. Continuar o download consumirá os seus dados.</string>
-    <string name="game_saponsorship_finished_game">O launcher iniciou o jogo com sucesso %s vezes! Se você o achar útil, considere apoiar o desenvolvedor! :)</string>
     <string name="mods_update_task_loading">Sincronizando dados do mod: %s</string>
     <string name="version_summary_fools_2_0">Não vamos atualizá-los! Se você encontrar um bug, azar o seu! XD</string>
     <string name="versions_export">Exportar Modpack</string>

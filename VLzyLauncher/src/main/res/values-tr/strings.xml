@@ -659,8 +659,6 @@
     <string name="control_editor_exit_confirm">Çık</string>
     <string name="about_launcher_title">Başlatıcı Hakkında</string>
     <string name="about_launcher_version">Başlatıcı Versiyonu: %s</string>
-    <string name="about_launcher_author_movtery_title">MovTery</string>
-    <string name="about_launcher_author_movtery_text">%s\'nin Oluşturucusu</string>
     <string name="about_launcher_project_link">Proje Linki</string>
     <string name="about_sponsor">Sponsorluk Desteği</string>
     <string name="about_acknowledgements_title">Teşekkür ve Atıflar</string>
@@ -672,8 +670,6 @@
     <string name="about_acknowledgements_bangbang93_text">%s, BMCL API yansıtma kaynağını kullanır</string>
     <string name="about_acknowledgements_github_community">GitHub Topluluğu</string>
     <string name="about_acknowledgements_github_community_text">GitHub topluluğundan tüm hata bildiriminde bulunanlar ve katkıda bulunanlar</string>
-    <string name="about_acknowledgements_weblate_community">Weblate Topluluğu</string>
-    <string name="about_acknowledgements_weblate_community_text">Topluluk dil yerelleştirmesine katılan tüm çevirmenler</string>
     <string name="about_plugin_title">Yüklenmiş Eklentiler</string>
     <string name="about_library_title">Üçüncü Parti Kütüphaneler</string>
     <string name="url_wiki_minecraft_game_release">https://minecraft.wiki/w/Java_Edition_%s</string>
@@ -1025,7 +1021,6 @@
     <string name="crash_link_share_failed_link_not_found">Uygun bir bağlantı bulunamadı. Lütfen daha sonra deneyin.</string>
     <string name="download_game_addon_warning_api">%s seçili değil. Eğer indirmeden devam ederseniz, çoğu modlar çalışmayacak!</string>
     <string name="download_install_warning_mobile_data">Mobil Veri kullanıyorsunuz. İndirmeye devam etmek mobil verinizden alacaktır.</string>
-    <string name="game_saponsorship_finished_game">Başlatıcı oyunu %s kez başarıyla başlattı! Eğer faydalı bulduysanız, lütfen geliştiriciyi desteklemeyi düşünün! :)</string>
     <string name="account_advanced">Gelişmiş Ayarlar</string>
     <string name="account_local_uuid_tip_1">UUID, bir Minecraft oyuncusunun benzersiz tanımlayıcısıdır.</string>
     <string name="account_local_uuid_tip_2">Farklı başlatıcılar farklı UUID\'ler oluşturabilir.</string>

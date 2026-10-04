@@ -438,7 +438,6 @@
     <string name="game_menu_option_show_menu">Enable Menu Overlay</string>
     <string name="game_menu_option_show_menu_hided">Game menu overlay has been disabled. You can open the game menu using the system back button</string>
     <string name="game_menu_option_controls_opacity">Control Layout Opacity</string>
-    <string name="game_saponsorship_finished_game">The launcher has successfully launched the game %s times! If you find it useful, please consider supporting the developer! :)</string>
     <string name="game_vulkan_check_title">Vulkan Check</string>
     <string name="game_vulkan_check_text">Check whether your device supports running Minecraft 26.2+ with Vulkan. Results are for reference only.</string>
     <string name="game_vulkan_check_version">Vulkan version: %s</string>
@@ -1253,8 +1252,6 @@
     <!-- About -->
     <string name="about_launcher_title">About Launcher</string>
     <string name="about_launcher_version">Launcher Version: %s</string>
-    <string name="about_launcher_author_movtery_title">MovTery</string>
-    <string name="about_launcher_author_movtery_text">Author of %s</string>
     <string name="about_launcher_project_link">Project Link</string>
     <string name="about_sponsor">Sponsorship Support</string>
     <string name="about_acknowledgements_title">Acknowledgements</string>
@@ -1268,8 +1265,6 @@
     <string name="about_acknowledgements_mcim_text">%s uses the MCIM mirror source</string>
     <string name="about_acknowledgements_github_community">GitHub Community</string>
     <string name="about_acknowledgements_github_community_text">All issue reporters and contributors from the GitHub community</string>
-    <string name="about_acknowledgements_weblate_community">Weblate Community</string>
-    <string name="about_acknowledgements_weblate_community_text">All translators who participated in community language localization</string>
     <string name="about_plugin_title">Loaded Plugins</string>
     <string name="about_library_title">Third-Party Libraries</string>
     <!--  Check for Updates  -->
@@ -1522,6 +1517,18 @@
     <!-- Next-step hint shown near a screen corner during the final guide step; tapping any blank area finishes the whole guide -->
     <string name="guide_tip_finish">Tap any blank area to finish the guide</string>
     <string name="vlzy_launcher_tagline">VeryLazy Launcher</string>
-    <string name="vlzy_fork_attribution">VLzyLauncher is an independent, unofficial Minecraft: Java Edition launcher. Original authors are credited in About.</string>
+    <string name="vlzy_fork_attribution">VLzyLauncher is an unofficial Minecraft: Java Edition launcher, independently maintained by Nadzil123. Not affiliated with Mojang or Microsoft. Open-source credits are listed in About.</string>
+    <string name="vlzy_project_author" translatable="false">Nadzil123</string>
+    <string name="vlzy_project_author_description">Creator and maintainer of VLzyLauncher</string>
+    <string name="vlzy_report_issue">Report an issue</string>
+    <string name="vlzy_report_issue_description">Report bugs and suggest improvements for VLzyLauncher on GitHub.</string>
+    <string name="vlzy_contribute">Contribute to VLzyLauncher</string>
+    <string name="vlzy_contribute_description">Help with code, testing, documentation, or translations.</string>
+    <string name="vlzy_project_license">License</string>
+    <string name="vlzy_project_license_description">GNU General Public License, version 3 or later</string>
+    <string name="vlzy_original_code_credit">VLzyLauncher is an independently maintained hard fork of ZalithLauncher2. Original code by MovTery and contributors, licensed under GPL-3.0-or-later.</string>
+    <string name="vlzy_translation_contributors">Translation contributors</string>
+    <string name="vlzy_translation_contributors_description">Thanks to the original Weblate translators and everyone improving translations for VLzyLauncher.</string>
+    <string name="vlzy_native_plugins_external">Optional plugin downloads are hosted by third-party providers.</string>
     <string name="vlzy_releases">VLzy releases</string>
 </resources>

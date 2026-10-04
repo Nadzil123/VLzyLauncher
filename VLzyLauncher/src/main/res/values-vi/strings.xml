@@ -607,8 +607,6 @@
     <string name="shader_pack_manage_no_packs">Chưa có shader</string>
     <string name="about_launcher_title">Về launcher</string>
     <string name="about_launcher_version">Phiên bản: %s</string>
-    <string name="about_launcher_author_movtery_title">MovTery</string>
-    <string name="about_launcher_author_movtery_text">Tác giả %s</string>
     <string name="about_launcher_project_link">Địa chỉ dự án</string>
     <string name="about_sponsor">Ủng hộ</string>
     <string name="crash_type">Loại sự cố: %s</string>
@@ -829,8 +827,6 @@
     <string name="saves_manage_import_failed">Lỗi nhập bản lưu</string>
     <string name="about_acknowledgements_github_community">Cộng đồng Github</string>
     <string name="about_acknowledgements_github_community_text">Toàn bộ người báo lỗi và đóng góp trên Github</string>
-    <string name="about_acknowledgements_weblate_community">Cộng đồng Weblate</string>
-    <string name="about_acknowledgements_weblate_community_text">Các dịch giả bản địa hóa</string>
     <string name="theme_color_picker_edit_hex">Sửa mã Hex</string>
     <string name="theme_color_picker_edit_hex_invalid">Hex không hợp lệ</string>
     <string name="download_game_type_april_fools">Cá tháng tư</string>
@@ -1090,7 +1086,6 @@
     <string name="game_menu_option_hotbar_double_click">Nhấn đúp để đổi vật phẩm với tay phụ</string>
     <string name="game_menu_option_hotbar_long_click">Nhấn giữ để vứt vật phẩm đã chọn</string>
     <string name="game_menu_option_hotbar_long_click_delay">Độ trễ khi nhấn giữ thanh công cụ (hotbar)</string>
-    <string name="game_saponsorship_finished_game">Trình khởi chạy đã khởi động trò chơi thành công %s lần! Nếu bạn thấy nó hữu ích, hãy cân nhắc ủng hộ tác giả nhé! :D</string>
     <string name="game_vulkan_check_text">Kiểm tra xem thiết bị của bạn có hỗ trợ chạy Minecraft 26.2+ bằng Vulkan hay không. Kết quả chỉ mang tính chất tham khảo.</string>
     <string name="game_vulkan_check_extensions">Tiện ích mở rộng phụ thuộc:</string>
     <string name="game_vulkan_check_features">Tính năng phụ thuộc:</string>

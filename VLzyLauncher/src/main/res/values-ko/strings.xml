@@ -380,7 +380,6 @@
     <string name="game_menu_option_show_menu">메뉴 오버레이 켜기</string>
     <string name="game_menu_option_show_menu_hided">게임 메뉴 오버레이가 비활성화되었습니다. 시스템 뒤로 가기 버튼을 사용하여 게임 메뉴를 열 수 있습니다</string>
     <string name="game_menu_option_controls_opacity">조작 레이아웃 투명도</string>
-    <string name="game_saponsorship_finished_game">게임을 성공적으로 %s회 실행했습니다! 이 앱이 유용했다면 개발자를 후원해 주시는 건 어떨까요? :)</string>
     <string name="renderer_version_support">MC 버전 지원:</string>
     <string name="renderer_version_unsupported_warning">현재 렌더러 %s은(는) 이 게임 버전을 지원하지 않습니다. 계속 사용할 경우 그래픽 오류나 튕김 현상이 발생할 수 있습니다! 정말 진행하시겠습니까?</string>
     <string name="account_logging_time_out">네트워크 응답 시간 초과. 연결 상태를 확인해 주세요.</string>
@@ -904,8 +903,6 @@
     <string name="upgrade_is_latest">현재 이미 최신 버전입니다</string>
     <string name="upgrade_get_remote_failed">업데이트를 확인할 수 없습니다. 나중에 다시 시도해주세요.</string>
     <string name="about_plugin_title">로딩된 플러그인</string>
-    <string name="about_acknowledgements_weblate_community_text">커뮤니티 현지화에 참여한 모든 번역가들</string>
-    <string name="about_acknowledgements_weblate_community">Weblate 커뮤니티</string>
     <string name="about_acknowledgements_github_community_text">모든 Github 커뮤니티 기여자 및 이슈 제보자</string>
     <string name="about_acknowledgements_github_community">Github 커뮤니티</string>
     <string name="about_acknowledgements_mcmod_text">%s은(는) MCMod의 모드 및 모드팩 중국어 간체 번역을 사용합니다</string>
@@ -913,8 +910,6 @@
     <string name="about_acknowledgements_title">감사의 말</string>
     <string name="about_sponsor">스폰서 지원</string>
     <string name="about_launcher_project_link">프로젝트 링크</string>
-    <string name="about_launcher_author_movtery_text">%s의 제작자</string>
-    <string name="about_launcher_author_movtery_title">MovTery</string>
     <string name="about_launcher_version">런처 버전: %s</string>
     <string name="about_launcher_title">런처 정보</string>
     <string name="control_editor_exit_confirm">바로 나가기</string>

@@ -580,6 +580,57 @@ and physical-device upgrade checks still outstanding.
 
 ---
 
+## Accepted follow-up — Independent project identity (2026-10-04)
+
+**Goal:** Present Nadzil123 as VLzyLauncher's creator/maintainer and remove
+launcher-owned entry points that still act on behalf of the original project.
+The owner's final clarification is an independent project with hard-fork provenance
+from ZalithLauncher2, governed by the VLzy documents. Keep the explicit unofficial
+Minecraft: Java Edition launcher label and use `hard fork` in the code credit.
+
+**Architecture:** Reuse the existing About cards and link events. Keep project
+URLs separate from explicit third-party acknowledgements and optional plugins.
+Remove the unused updater after checking every reference; releases remain a
+manual link to the VLzy repository. Work directly on `main` as requested.
+
+- [x] Update About with the Nadzil123 profile, issue reporting, contributions and
+  GPL/source links; move original-code authors into acknowledgements.
+- [x] Remove the automatic upstream sponsor prompt, unused update view model,
+  update dialogs/models and obsolete update settings/URLs. Keep the existing
+  VLzy releases action and all working game/account/download paths.
+- [x] Replace original-project translation routing with VLzy contribution guidance;
+  keep inherited translators credited. Identify optional plugin sources as external.
+- [x] Remove unused creator resources and document the ownership/compatibility
+  boundary in the handoff, README, contribution guide and upstream notice.
+- [x] Compile resources, run the application tests and ARM64 build, inspect the
+  packaged owner text and absence of retired endpoints/classes, and obtain an
+  independent review. Check all locale XML, migration tests, manual release routing,
+  and that plugin discovery still uses the supported providers. Device checks
+  remain separate.
+- [x] Record actual build, test, package-audit and independent-review results.
+- [ ] Publish the completed changes from `main` and verify the remote commit.
+
+This slice does not add another account backend, update server or donation account,
+and does not change the owner-selected first-alpha release identity. Existing
+physical-device checks remain outstanding until observed or reported by the owner.
+
+The independent review completed after a temporary provider usage limit cleared:
+no confirmed issues, 18 locale files parsed and affected call sites checked.
+See `docs/reviews/2026-10-04-independent-project-review.md`.
+Final validation passed with 116 tests passing, 3 optional remote tests skipped,
+ARM64 APK/package audits and independent review. Publication remains blocked
+by the authenticated repository lookup returning `Repository not found`.
+
+Verification found a pre-existing installer UDP restart race in the unchanged
+`JVMSocketServer` code. The failing full-suite test and a standalone Java 25 probe
+show that `close()` can return before a blocked receive finishes and releases
+the bound port. Add repeated restart and callback-stop regression coverage;
+close the socket, then synchronize only with the receive operation before
+returning from stop. Keep callbacks outside that lock and preserve exclusive
+port binding. Verify the focused tests before repeating the full app build.
+
+---
+
 # 21. Implementation Philosophy
 
 > Keep the mature machinery.\

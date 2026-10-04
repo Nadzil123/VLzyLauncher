@@ -979,7 +979,6 @@
     <string name="control_editor_exit_confirm">Salir directamente</string>
     <string name="about_launcher_title">Acerca del launcher</string>
     <string name="about_launcher_version">Versión del launcher: %s</string>
-    <string name="about_launcher_author_movtery_text">Autor de %s</string>
     <string name="about_launcher_project_link">Enlace del proyecto</string>
     <string name="about_sponsor">Soporte de patrocinio</string>
     <string name="about_acknowledgements_title">Agradecimientos</string>
@@ -991,8 +990,6 @@
     <string name="about_acknowledgements_bangbang93_text">%s utiliza la fuente espejo de BMCL API</string>
     <string name="about_acknowledgements_github_community">Comunidad de GitHub</string>
     <string name="about_acknowledgements_github_community_text">Todos los reporteros de problemas y contribuyentes de la comunidad de GitHub</string>
-    <string name="about_acknowledgements_weblate_community">Comunidad de Weblate</string>
-    <string name="about_acknowledgements_weblate_community_text">Todos los traductores que participaron en la localización del idioma de la comunidad</string>
     <string name="about_plugin_title">Plugins cargados</string>
     <string name="about_library_title">Bibliotecas de terceros</string>
     <string name="upgrade_title">Buscar actualizaciones</string>

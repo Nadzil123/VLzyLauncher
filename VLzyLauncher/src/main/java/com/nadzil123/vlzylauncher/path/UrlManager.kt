@@ -51,10 +51,12 @@ const val URL_MINECRAFT_VERSION_REPOS: String = "https://piston-meta.mojang.com/
 const val URL_MINECRAFT_ASSETS_INDEX: String = "https://launchermeta.mojang.com/v1/packages"
 const val URL_MINECRAFT_PURCHASE = "https://www.xbox.com/games/store/minecraft-java-bedrock-edition-for-pc/9nxp44l49shj"
 const val URL_PROJECT: String = "https://github.com/Nadzil123/VLzyLauncher"
-const val URL_PROJECT_INFO: String = UpstreamReferences.UPDATE_METADATA
+const val URL_AUTHOR: String = "https://github.com/Nadzil123"
+const val URL_RELEASES: String = "$URL_PROJECT/releases"
+const val URL_ISSUES: String = "$URL_PROJECT/issues"
+const val URL_CONTRIBUTING: String = "$URL_PROJECT/blob/main/CONTRIBUTING.md"
+const val URL_LICENSE: String = "$URL_PROJECT/blob/main/LICENSE"
 const val URL_COMMUNITY: String = "$URL_PROJECT/graphs/contributors"
-const val URL_WEBLATE: String = UpstreamReferences.TRANSLATIONS
-const val URL_SUPPORT: String = "https://ifdian.net/a/MovTery"
 const val URL_EASYTIER: String = "https://easytier.cn/"
 
 const val URL_GITHUB_RENDERER_PLUGINS = "https://github.com/ShirosakiMio/FCLRendererPlugin/releases/tag/Renderer"

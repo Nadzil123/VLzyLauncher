@@ -35,7 +35,5 @@ User-facing changes are recorded here. Installable APKs are published on
   Mojang or Microsoft.
 - A renamed launcher activity may require re-adding the home-screen shortcut
   after updating; the app remains available in the app drawer.
-- Local validation passed: 116 unit tests, 3 optional remote tests skipped,
-  ARM64 APK build and package/signature checks. Final device testing remains open.
 
 [1.0.0-alpha.1-20261003]: https://github.com/Nadzil123/VLzyLauncher/releases/tag/v1.0.0-alpha.1-20261003

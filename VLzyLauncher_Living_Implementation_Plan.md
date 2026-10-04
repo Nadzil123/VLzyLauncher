@@ -619,7 +619,9 @@ no confirmed issues, 18 locale files parsed and affected call sites checked.
 See `docs/reviews/2026-10-04-independent-project-review.md`.
 Final validation passed with 116 tests passing, 3 optional remote tests skipped,
 ARM64 APK/package audits and independent review. Publication remains blocked
-by the authenticated repository lookup returning `Repository not found`.
+by `git push origin main` and authenticated repository lookup returning
+`Repository not found`. The implementation is committed locally as `3e6d925a`;
+restore access or obtain the current repository URL before publishing.
 
 Verification found a pre-existing installer UDP restart race in the unchanged
 `JVMSocketServer` code. The failing full-suite test and a standalone Java 25 probe

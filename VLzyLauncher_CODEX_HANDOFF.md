@@ -24,11 +24,15 @@ race: stop now waits for active reception to unwind before the port is reused.
 Coverage includes 200 rapid restart cycles, occupied-port rejection and stopping
 from the receive callback. Physical-device validation remains outstanding.
 
-The prior rename was pushed successfully through `d46d90dd` on `origin/main`.
-Remote access has since changed: `git fetch origin main` reports `Repository not
-found`, and GitHub API repository lookup also fails despite an active Nadzil123
-login. Confirm the current repository URL/access before claiming this follow-up
-is pushed. No tag, GitHub release or APK upload has been performed.
+The implementation is committed locally on `main` as `3e6d925a`
+(`VLzyLauncher v1.0.0-alpha.1-20261003: independent project identity`).
+The subsequent `git push origin main` failed with `Repository not found` for
+`https://github.com/Nadzil123/VLzyLauncher.git/`; this follow-up is **not pushed**.
+The prior rename was pushed successfully through `d46d90dd` on `origin/main`,
+but that tracking reference is now cached: fetch and GitHub API lookup also fail
+despite an active Nadzil123 login. Obtain the current repository URL or restore
+access, then push and verify the remote commit. No tag, GitHub release or APK
+upload has been performed.
 
 ## Current release direction — 2026-10-03
 

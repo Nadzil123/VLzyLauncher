@@ -10,6 +10,8 @@ permissions:
 
 jobs:
   Build:
+    # Alpha prereleases ship explicitly uploaded, verified development APKs.
+    if: ${{ !github.event.release.prerelease }}
     uses: ./.github/workflows/build.yml
     with:
       variant: Release

@@ -35,3 +35,21 @@ LWJGL/*/build/
 .ampersand/
 
 .vscode/
+
+# Local project planning, agent notes and master artwork
+/VLzyLauncher_*.md
+/VLzyLauncher_Logo.png
+/docs/bootstrap*.md
+/docs/*-followup.md
+/docs/independent-project.md
+/docs/offline-profiles.md
+/docs/project-naming.md
+/docs/service-configuration.md
+/docs/reviews/
+/docs/superpowers/
+/docs/releases/
+
+# Local release staging; distribute APKs through GitHub Releases
+/.release/
+*.apk
+*.aab

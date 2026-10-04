@@ -4,10 +4,10 @@ VLzyLauncher is an independent, unofficial Minecraft: Java Edition launcher,
 created and maintained by
 [Nadzil123](https://github.com/Nadzil123). Development, issue reports and pull
 requests belong in [Nadzil123/VLzyLauncher](https://github.com/Nadzil123/VLzyLauncher).
-The current target is **VLzyLauncher v1.0.0-alpha.1-20261003** on the way to 1.0.0.
-The code began as a hard fork of ZalithLauncher2. VLzy's own Concept and
-Specification govern development; contributions do not depend on adopting the
-original project's roadmap.
+The code began as a hard fork of ZalithLauncher2 and develops independently.
+See the [changelog](CHANGELOG.md) and
+[GitHub issues](https://github.com/Nadzil123/VLzyLauncher/issues) for published
+changes and current work.
 
 ## Report a problem
 
@@ -23,9 +23,8 @@ offline profile and supported Modrinth content in this alpha.
 ## Code and documentation
 
 - Target `main` and keep changes focused on the reported problem.
-- Read the [living specification](VLzyLauncher_Living_Specification.md) and
-  [handoff](VLzyLauncher_CODEX_HANDOFF.md) for current scope and verification gaps.
-- Follow the [build and signing guide](docs/bootstrap.md). Run relevant unit
+- Discuss substantial changes in a GitHub issue before implementation.
+- Follow the [build and signing guide](docs/BUILDING.md). Run relevant unit
   tests and compile the changed app before submitting; describe what was tested
   and distinguish device testing from local build checks.
 - Use English for new interface text and project documentation. Preserve
@@ -48,3 +47,8 @@ Published builds belong on the
 The app opens that page for launcher updates. Native and renderer plugin links
 can lead to third-party providers; those plugins are separate from VLzyLauncher
 releases. Do not commit signing keys or service credentials.
+
+Keep local planning, agent handoff/review notes and master artwork out of Git.
+Only application assets needed to build the launcher belong in its source tree.
+Publish APKs as release assets; document versions in `CHANGELOG.md` and release
+notes rather than adding version announcements to the README.

@@ -24,7 +24,7 @@ The application module is `VLzyLauncher/`; its source namespace is
 `VLzyLauncher/build/outputs/apk/debug/` and use application ID
 `com.nadzil123.vlzylauncher.debug`.
 
-Three optional remote integration tests are skipped by default. Setting
+Remote integration tests are skipped by default. Setting
 `VLZY_RUN_REMOTE_INTEGRATION_TESTS=true` enables live server-ping and crash-log
 upload tests; the upload tests publish their test content.
 
@@ -61,9 +61,9 @@ Never reuse signing keys found in public source history.
 ## Publishing
 
 Keep version history in `CHANGELOG.md` and tag the corresponding source commit.
-Publish installable APKs and their SHA-256 checksums as GitHub Release assets.
+Publish installable APKs as GitHub Release assets.
 Mark alpha builds as prereleases and state their supported architecture and
-signing/build type. Do not upload signing keys, local plans or master artwork.
+signing/build type. Keep release notes focused on changes and known limitations.
 
 The release workflow builds signed APKs for stable releases. Prereleases use
-explicitly uploaded, verified APKs and do not trigger the production signing job.
+uploaded APKs and do not trigger the production signing job.

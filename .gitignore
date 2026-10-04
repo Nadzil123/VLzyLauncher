@@ -20,7 +20,7 @@ local.properties
 LWJGL/build/
 LWJGL/*/build/
 
-# AI agent
+# Local development settings
 .zcode/
 .agent/
 .claude/
@@ -36,7 +36,7 @@ LWJGL/*/build/
 
 .vscode/
 
-# Local project planning, agent notes and master artwork
+# Local project notes and master artwork
 /VLzyLauncher_*.md
 /VLzyLauncher_Logo.png
 /docs/bootstrap*.md

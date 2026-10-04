@@ -25,8 +25,7 @@ offline profile and supported Modrinth content in this alpha.
 - Target `main` and keep changes focused on the reported problem.
 - Discuss substantial changes in a GitHub issue before implementation.
 - Follow the [build and signing guide](docs/BUILDING.md). Run relevant unit
-  tests and compile the changed app before submitting; describe what was tested
-  and distinguish device testing from local build checks.
+  tests and compile the changed app before submitting.
 - Use English for new interface text and project documentation. Preserve
   existing user data, offline profiles, and supported plugin compatibility.
 - Keep original copyright notices and dependency licenses. See
@@ -47,8 +46,3 @@ Published builds belong on the
 The app opens that page for launcher updates. Native and renderer plugin links
 can lead to third-party providers; those plugins are separate from VLzyLauncher
 releases. Do not commit signing keys or service credentials.
-
-Keep local planning, agent handoff/review notes and master artwork out of Git.
-Only application assets needed to build the launcher belong in its source tree.
-Publish APKs as release assets; document versions in `CHANGELOG.md` and release
-notes rather than adding version announcements to the README.
